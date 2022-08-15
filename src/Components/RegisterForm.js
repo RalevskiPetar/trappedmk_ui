@@ -5,9 +5,8 @@ import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { AiOutlinePhone } from 'react-icons/ai'
 import { BsFileEarmarkPerson } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from '../Redux/Actions'
+import { updateUser, createUser } from '../Redux/Users/Actions'
 import { Navigate, useParams } from 'react-router'
-import { createUser } from '../Redux/Actions'
 import { Link } from 'react-router-dom'
 
 const RegisterForm = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUser, updateUser_Type } from '../../Redux/Actions'
+import { updateUser, updateUser_Type } from '../../Redux/Users/Actions'
 
 
 const AdminSettings = () => {

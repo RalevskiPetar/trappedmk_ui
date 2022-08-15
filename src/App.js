@@ -3,11 +3,8 @@ import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import MainPage from './Components/MainPage';
-import NavMenu from './Components/NavMenu';
-import Footer from './Footer';
-import Main from './Main';
-import { createClothes, createUser, createUser_Type, fetchCategories, fetchUsers, login, updateUser, updateUser_Type } from './Redux/Actions';
-import Title from './Title';
+import { fetchCategories } from './Redux/Clothes/Actions';
+import { fetchUsers } from "./Redux/Users/Actions"
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Components/Login';
 import Register from './Components/Register';

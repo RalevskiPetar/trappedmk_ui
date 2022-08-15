@@ -3,7 +3,7 @@ import { BiLockAlt } from 'react-icons/bi'
 import { FiMail } from 'react-icons/fi'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import { login } from '../Redux/Actions'
+import { login } from '../Redux/Users/Actions'
 
 const LoginFrom = () => {
     const user = useSelector(state => state?.user)

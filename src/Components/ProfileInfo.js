@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import  BarLoader  from './BarLoader'
-import { updateUser } from '../Redux/Actions'
+import { updateUser } from '../Redux/Users/Actions'
 
 const ProfileInfo = () => {
     const { id } = useParams()
