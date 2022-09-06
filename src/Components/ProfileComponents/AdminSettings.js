@@ -41,18 +41,18 @@ const AdminSettings = () => {
   return (
     <form onSubmit={e => makeAdmin(e)} className='flex flex-col items-center w-screen overflow-x-hidden gap-3 mb-10'>
         <h1 className='font-poppins text-slate-300 text-center p-4 '>- Make Admin -</h1>
-        <input onChange={e => setNewAdmin(e.target.value)} name="email" type="text" placeholder="email"  className="bg-slate-100 w-2/3 font-poppins   p-2 outline-none "/>
+        <input onChange={e => setNewAdmin(e.target.value)} name="email" type="text" placeholder="email"  className="bg-slate-50 w-2/3 lg:w-1/2 font-poppins   p-2 outline-none "/>
         <button className='border-[0.1rem] text-black font-poppins rounded-md p-2 pl-4 pr-4'>submit</button>
         <h1 className='font-poppins text-slate-300 text-center p-4 '>- List of Admins -</h1>
-        <div className='flex flex-row justify-between p-6 lg:p-0 w-screen'>
-            <div onClick={e => setModal(true)} className='w-1/2 border-r border-r-slate-200 border-b border-b-200-slate'> 
+        <div className='flex flex-row justify-between lg:justify-center p-6 lg:p-0 w-screen'>
+            <div onClick={e => setModal(true)} className='w-1/2 lg:w-1/4 border-r border-r-slate-200 border-b border-b-200-slate'> 
                 
-               <h1 className='font-poppins border-b border-b-200-slate lg:text-2xl lg:p-1 lg:border-t-[0.1rem] lg:border-t-slate-200'>Name</h1>  
-               {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b border-b-200-slate lg:text-xl lg:p-1' onClick={e => setSelected(us.name)}>{us.name}</h1>)}
+               <h1 className='font-poppins border-b border-b-200-slate lg:text-2xl lg:p-1 lg:border-t-[0.1rem] lg:border-l-[0.1rem] lg:border-t-slate-200'>Name</h1>  
+               {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b lg:border-l-[0.1rem] border-b-200-slate lg:text-xl lg:p-1' onClick={e => setSelected(us.name)}>{us.name}</h1>)}
             </div>
-            <div className='w-1/2'>
-            <h1 className='font-poppins border-b border-b-200-slate lg:border-t-[0.1rem] lg:border-t-slate-200 lg:text-2xl lg:p-1'>Email</h1> 
-            {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b border-b-200-slate lg:text-xl lg:p-1'>{us.email}</h1>)}
+            <div className='w-1/2 lg:w-1/4'>
+            <h1 className='font-poppins border-b border-b-200-slate lg:border-t-[0.1rem] lg:border-t-slate-200 lg:border-r-[0.1rem] lg:text-2xl lg:p-1'>Email</h1> 
+            {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b border-b-200-slate lg:border-r-[0.1rem] lg:text-xl lg:p-1'>{us.email}</h1>)}
             </div>
             
         </div>

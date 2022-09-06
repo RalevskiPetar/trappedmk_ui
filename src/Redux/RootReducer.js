@@ -11,7 +11,7 @@ const allReducers = combineReducers({
     clothes: ClothesReducer
 })
 
-const store = createStore(allReducers, compose(
+export const store = createStore(allReducers, compose(
     applyMiddleware(thunk),
     composeWithDevTools()
 ))

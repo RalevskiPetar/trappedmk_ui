@@ -10,7 +10,7 @@ const NewProducts = () => {
   return (
     <div>
       <Header />
-      <div className='flex flex-row justify-between font-poppins w-screen pt-14 overflow-x-scroll'>
+      <div className='flex flex-row justify-between font-poppins w-screen pt-14 '>
         {category.map(c => <h1 className='p-4 text-sm'>{c.name}</h1>)}
 
       </div>

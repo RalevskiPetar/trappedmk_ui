@@ -3,10 +3,22 @@ import { BsCircle, BsCircleFill } from 'react-icons/bs'
 
 const Magacin = () => {
   const [ expanded , setExpanded] = useState(false)
+  const [ createProduct , setCreateProduct ] = useState(false)
   const [ clicked , setClicked ] = useState(3)
   return (
     <div>
-      <h1 onClick={e => setExpanded(!expanded)} className='font-poppins text-slate-400 text-center border-[0.1rem] p-2 font-bold'>- FILTER -</h1>
+      <h1 onClick={e=> setCreateProduct(!createProduct)} className='font-poppins text-center font-bold p-2 cursor-pointer'>• CREATE PRODUCT •</h1>
+      {createProduct == true ? 
+      <div className='flex flex-col items-center gap-2 p-2'>
+       <input className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="NAME"/>
+       <input className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="DESCRIPTION"/>
+       <input className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="PRICE"/>
+       <input className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="SIZE"/>
+       <input className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="NUMBER OF PRODUCTS"/>
+       <button className='font-poppins bg-black text-white  pl-4 pr-4 p-2 rounded-sm'>CREATE PRODUCT</button>
+      </div> 
+      : null}
+      <h1 onClick={e => setExpanded(!expanded)} className='font-poppins border-t-[0.1rem] border-b-[0.1rem] cursor-pointer text-center font-bold p-2'>• FILTER •</h1>
          {expanded == true ? 
          <div >
           <ul className='font-poppins p-4 animate-fade-in-down '>
