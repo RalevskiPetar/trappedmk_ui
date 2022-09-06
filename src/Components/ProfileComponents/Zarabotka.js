@@ -1,74 +1,87 @@
+import { m } from 'framer-motion'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import DodajSuma from './DodajSuma'
 import Meseci from './Meseci'
 
 const Zarabotka = () => {
+  const months = [
+    {
+      id: 1,
+      "month" : "Jan"
+    },
+    {
+      id: 2,
+      "month" : "Feb"
+    },
+    {
+      id: 3,
+      "month" : "Mar"
+    },
+    {
+      id: 4,
+      "month" : "Apr"
+    },
+    {
+      id: 5,
+      "month" : "May"
+    },
+    {
+      id: 6,
+      "month" : "Jun"
+    },
+    {
+      id: 7,
+      "month" : "Jul"
+    },
+    {
+      id: 8,
+      "month" : "Aug"
+    },
+    {
+      id: 9,
+      "month" : "Sep"
+    },
+    {
+      id: 10,
+      "month" : "Oct"
+    },
+    {
+      id: 11,
+      "month" : "Nov"
+    },
+    {
+      id: 12,
+      "month" : "Dec"
+    },
+
+    ]
   const [ expanded , setExpanded ] = useState(false)
   const [ calendar , setCalendar ] = useState(false)
+  const [ mesec , setMesec] = useState(7)
+  const money_logs = useSelector(state => state.money.money_tracker.data)
+  let odliv_suma = 0;
+  let priliv_suma = 0;
+  money_logs?.money_tracker_all.filter(m => m.type_id == 2 && m.date.slice(8,11) === months.find(me => me.id === mesec).month ).map(ml => odliv_suma+= ml.ammount)
+  money_logs?.money_tracker_all.filter(m => m.type_id == 1 && m.date.slice(8,11) === months.find(me => me.id === mesec).month).map(ml => priliv_suma+= ml.ammount)
+  
   return (
 <div className='flex flex-col'>
   <h1 onClick={e => setCalendar(true)} className='font-poppins text-center p-2 bg-slate-100 shadow-md cursor-pointer'>IZBERI MESEC</h1>
-  {calendar == true ? <Meseci setCalendar={setCalendar} /> : null}
+  {calendar == true ? <Meseci setMesec={setMesec}  setCalendar={setCalendar} /> : null}
 <div className='flex flex-row  '>
       <div className='h-1/2 w-1/2 border-r-[0.0rem] border-slate-200'>
         <h1 className='font-poppins text-center text-red-500 lg:text-2xl border-[0.1rem] border-2-slate-200 font-bold p-4'>ODLIV</h1>
         <div className='flex flex-col justify-center '>
 
+          {money_logs.money_tracker_all.filter(m => m.type_id === 2 && m.date.slice(8,11) === months.find(me => me.id === mesec).month).map(m => 
           <div className='flex flex-row justify-between border-b-[0.03rem] border-r-[0.03rem] border-r-slate-200 border-b-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins hidden'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-red-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
+            <h1 className='font-poppins text-red-400 font-bold'>{m.ammount} DEN.</h1>
+         
+            <h1 className='font-poppins'>{m.date}</h1>
+            <h1 className='font-poppins'>{m.pricina}</h1>
+          </div>)}
+          
         </div>
 
       </div>
@@ -76,61 +89,13 @@ const Zarabotka = () => {
         <h1 className='font-poppins text-center text-green-400 font-bold lg:text-2xl p-4 border-[0.1rem] border-2-slate-200'>PRILIV</h1>
         <div className='flex flex-col justify-center '>
 
-          <div className='flex flex-row justify-between border-b-[0.03rem] border-l-[0.03rem] border-l-slate-200 border-b-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
-          <div className='flex flex-row justify-between border-[0.03rem] border-slate-200 p-2'>
-            <h1 className='font-poppins text-green-400 font-bold'>340 DEN.</h1>
-            <h1 className='font-poppins'>21/06/2021</h1>
-            <h1 className='font-poppins'>poster</h1>
-          </div>
+        {money_logs.money_tracker_all.filter(m => m.type_id === 1 && m.date.slice(8,11) === months.find(m => m.id === mesec).month).map(m => 
+          <div className='flex flex-row justify-between border-b-[0.03rem] border-r-[0.03rem] border-r-slate-200 border-b-slate-200 p-2'>
+            <h1 className='font-poppins text-green-400 font-bold'>{m.ammount} DEN.</h1>
+            <h1 className='font-poppins'>{m.date}</h1>
+            <h1 className='font-poppins'>{m.pricina}</h1>
+          </div>)}
+         
           
           
         </div>
@@ -149,10 +114,10 @@ const Zarabotka = () => {
 
      </div>
      <div className='w-1/2'>
-       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins text-red-500'>41.000 DEN.</h1>
-       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins text-green-400'>78.000 DEN.</h1>
-       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins'>37.000 DEN.</h1>
-       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins'>JUNI</h1>
+       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins text-red-500'>{odliv_suma} DEN.</h1>
+       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins text-green-400'>{priliv_suma} DEN.</h1>
+       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins'>{priliv_suma - odliv_suma} DEN.</h1>
+       <h1 className='border-b-[0.1rem] border-slate-200 p-2 text-end font-poppins'>{months.find(m => m.id === mesec).month}</h1>
      </div>
   </div>
 </div>

@@ -16,15 +16,17 @@ import NewProducts from './Components/NewProducts'
 import MProducts from './Components/MProducts';
 import WProducts from './Components/WProducts';
 import PorackaProizvod from './Components/PorackaProizvod';
+import { fetchMoneyTracker } from './Redux/Money/Actions';
 
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchUsers())
     dispatch(fetchCategories())
+    dispatch(fetchMoneyTracker())
   }, [])
   const userLogoutStatus = useSelector(state => state.user.user.logout)
-
+  console.log(fetchMoneyTracker())
   return (
     <div className="lg:overflow-y-hidden">
       <Routes>

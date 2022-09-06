@@ -107,7 +107,7 @@ const Profile = () => {
         else if (option == "Распродажба") return <Rasprodazba />
 
     }
-    console.log(menu.find(m => m.id == color).name)
+    
     return (
 
         <div >
