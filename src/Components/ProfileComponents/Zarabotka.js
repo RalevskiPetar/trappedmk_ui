@@ -62,9 +62,10 @@ const Zarabotka = () => {
   const money_logs = useSelector(state => state.money.money_tracker.data)
   let odliv_suma = 0;
   let priliv_suma = 0;
-  money_logs?.money_tracker_all.filter(m => m.type_id == 2 && m.date.slice(8,11) === months.find(me => me.id === mesec).month ).map(ml => odliv_suma+= ml.ammount)
-  money_logs?.money_tracker_all.filter(m => m.type_id == 1 && m.date.slice(8,11) === months.find(me => me.id === mesec).month).map(ml => priliv_suma+= ml.ammount)
-  
+
+  money_logs?.filter(m => m.type_id == 2 && m.date.slice(8,11) === months.find(me => me.id === mesec).month ).map(ml => odliv_suma+= ml.ammount)
+  money_logs?.filter(m => m.type_id == 1 && m.date.slice(8,11) === months.find(me => me.id === mesec).month).map(ml => priliv_suma+= ml.ammount)
+ 
   return (
 <div className='flex flex-col'>
   <h1 onClick={e => setCalendar(true)} className='font-poppins text-center p-2 bg-slate-100 shadow-md cursor-pointer'>IZBERI MESEC</h1>
@@ -73,8 +74,7 @@ const Zarabotka = () => {
       <div className='h-1/2 w-1/2 border-r-[0.0rem] border-slate-200'>
         <h1 className='font-poppins text-center text-red-500 lg:text-2xl border-[0.1rem] border-2-slate-200 font-bold p-4'>ODLIV</h1>
         <div className='flex flex-col justify-center '>
-
-          {money_logs.money_tracker_all.filter(m => m.type_id === 2 && m.date.slice(8,11) === months.find(me => me.id === mesec).month).map(m => 
+          {money_logs?.filter(m => m.type_id === 2 && m.date.slice(8,11) === months.find(me => me.id === mesec).month).map(m => 
           <div className='flex flex-row justify-between border-b-[0.03rem] border-r-[0.03rem] border-r-slate-200 border-b-slate-200 p-2'>
             <h1 className='font-poppins text-red-400 font-bold'>{m.ammount} DEN.</h1>
          
@@ -89,7 +89,7 @@ const Zarabotka = () => {
         <h1 className='font-poppins text-center text-green-400 font-bold lg:text-2xl p-4 border-[0.1rem] border-2-slate-200'>PRILIV</h1>
         <div className='flex flex-col justify-center '>
 
-        {money_logs.money_tracker_all.filter(m => m.type_id === 1 && m.date.slice(8,11) === months.find(m => m.id === mesec).month).map(m => 
+        {money_logs?.filter(m => m.type_id === 1 && m.date.slice(8,11) === months.find(m => m.id === mesec).month).map(m => 
           <div className='flex flex-row justify-between border-b-[0.03rem] border-r-[0.03rem] border-r-slate-200 border-b-slate-200 p-2'>
             <h1 className='font-poppins text-green-400 font-bold'>{m.ammount} DEN.</h1>
             <h1 className='font-poppins'>{m.date}</h1>

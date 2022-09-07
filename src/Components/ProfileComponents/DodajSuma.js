@@ -42,9 +42,9 @@ const DodajSuma = (props) => {
                     </div>
                 </div>
                 <h1 className='text-center font-poppins text-[0.8rem] text-slate-400 '>* YOU HAVE TO SELECT ONE </h1>
-                <button onClick={e => handleNewMoneyLog(e)} className='font-poppins bg-zinc-900 text-white p-2 pr-4 pl-4 rounded-md mt-4 lg:w-1/3'>add</button>
+                <button type='button' onClick={e => handleNewMoneyLog(e)} className='font-poppins bg-zinc-900 text-white p-2 pr-4 pl-4 rounded-md mt-4 lg:w-1/3'>add</button>
                 <h1 className='font-poppins text-center p-4'>or</h1>
-                <button onClick={e => props.setExpanded(false)} className='font-poppins lg:w-1/3 border-[0.1rem] border-zinc-900 text-zinc-900 p-2 pr-4 pl-4 rounded-md mt-2'>close</button>
+                <button type='button'  onClick={e => props.setExpanded(false)} className='font-poppins lg:w-1/3 border-[0.1rem] border-zinc-900 text-zinc-900 p-2 pr-4 pl-4 rounded-md mt-2'>close</button>
          
             </div>
             

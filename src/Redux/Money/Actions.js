@@ -20,7 +20,10 @@ export const create_Money = (money) => (dispatch , getState) => {
     dispatch({type: "CREATE_MONEY_TRACK_REQUEST"})
     create_MoneyCall(money)
     .then(res => dispatch({type: "CREATE_MONEY_TRACK_SUCCESS" , payload: res}))
-    .catch(e => dispatch({type: "CREATE_MONEY_TRACK_FAILURE" , payload: e}))
+    .catch(e => {
+        console.log(e)
+        dispatch({type: "CREATE_MONEY_TRACK_FAILURE" , payload: e})
+    })
 }
 
 export const update_Money = (money) => (dispatch , getState) => {

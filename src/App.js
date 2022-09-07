@@ -26,7 +26,6 @@ function App() {
     dispatch(fetchMoneyTracker())
   }, [])
   const userLogoutStatus = useSelector(state => state.user.user.logout)
-  console.log(fetchMoneyTracker())
   return (
     <div className="lg:overflow-y-hidden">
       <Routes>

@@ -25,13 +25,14 @@ export const Money_Tracker_Reducer = (state = InitialState , action) => {
                money_tracker: {
                 createStatus: "Success",
                 createMessage: " ",
-                data: action.payload
+                data: action.payload?.money_tracker_all
                }     
             }    
         case "FETCH_MONEY_TRACK_FAILURE":
             return {
                   ...state,
                   money_tracker: {
+                    ...state.money_tracker,
                     createStatus: "Fail",
                     createMessage: action.payload
                   }      
@@ -46,6 +47,7 @@ export const Money_Tracker_Reducer = (state = InitialState , action) => {
               }
             }    
         case "CREATE_MONEY_TRACK_SUCCESS":
+            console.log(action.payload)
             return {
                    ...state,
                    money_tracker: {
@@ -59,6 +61,7 @@ export const Money_Tracker_Reducer = (state = InitialState , action) => {
             return {
                 ...state,
                 money_tracker: {
+                    ...state.money_tracker,
                     createStatus: "Fail",
                     createMessage: action.payload
                 }
@@ -88,6 +91,6 @@ export const Money_Tracker_Reducer = (state = InitialState , action) => {
                     }
                 }
         default:
-            return state                
+                    return state                
             }    
         }
