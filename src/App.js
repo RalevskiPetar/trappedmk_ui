@@ -3,7 +3,7 @@ import { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import MainPage from './Components/MainPage';
-import { fetchCategories } from './Redux/Clothes/Actions';
+import { fetchCategories, fetchClothes } from './Redux/Clothes/Actions';
 import { fetchUsers } from "./Redux/Users/Actions"
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Components/Login';
@@ -17,6 +17,7 @@ import MProducts from './Components/MProducts';
 import WProducts from './Components/WProducts';
 import PorackaProizvod from './Components/PorackaProizvod';
 import { fetchMoneyTracker } from './Redux/Money/Actions';
+import { fetch_Store } from './Redux/Store/Actions';
 
 function App() {
   const dispatch = useDispatch()
@@ -24,6 +25,8 @@ function App() {
     dispatch(fetchUsers())
     dispatch(fetchCategories())
     dispatch(fetchMoneyTracker())
+    dispatch(fetch_Store())
+    dispatch(fetchClothes())
   }, [])
   const userLogoutStatus = useSelector(state => state.user.user.logout)
   return (
@@ -35,7 +38,7 @@ function App() {
         <Route path="/maski" element={<MProducts />} />
         <Route path="/zenski" element={<WProducts />} />
         <Route path="/novo" element={<NewProducts />} />
-        <Route path="/nfnc" element={<PorackaProizvod />} />
+        <Route path="/siteproizvodi/:name" element={<PorackaProizvod />} />
         <Route path="/siteproizvodi" element={<AllProducts />} />
         {userLogoutStatus === true ? <Route path="*" element={<Navigate replace to="/login" />} /> : <Fragment>
           <Route path="/profile" element={<Profile />} />

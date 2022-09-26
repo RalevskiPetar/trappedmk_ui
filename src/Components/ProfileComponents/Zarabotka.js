@@ -60,6 +60,7 @@ const Zarabotka = () => {
   const [ calendar , setCalendar ] = useState(false)
   const [ mesec , setMesec] = useState(7)
   const money_logs = useSelector(state => state.money.money_tracker.data)
+  console.log(money_logs)
   let odliv_suma = 0;
   let priliv_suma = 0;
 

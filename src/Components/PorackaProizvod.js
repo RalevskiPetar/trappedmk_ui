@@ -4,8 +4,20 @@ import Header from './Header'
 import { RiArrowLeftSLine , RiArrowRightSLine } from 'react-icons/ri'
 import { AiFillPlusCircle, AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BiCart } from 'react-icons/bi'
+import { useParams } from 'react-router'
+import { useSelector } from 'react-redux'
  
 const PorackaProizvod = () => {
+  const { name} = useParams()
+  const product_data = useSelector(state => state.clothes.clothes.data)
+  const store_available = useSelector(state => state.store.store.data.stores)
+ 
+  const getSize = (option) => {
+    if (option == 1) return "S"
+    else if (option == 2) return "M"
+    else if (option == 3) return "L"
+  }
+ console.log(uniqueId)
   return (
     <div>
         <Header />
@@ -29,15 +41,17 @@ const PorackaProizvod = () => {
           <div className='border-[0.1rem] border-red-200 p-4  '>
             <h1 className='font-poppins text-red-400 font-bold '>Make 3 orders get 20% off</h1>
           </div>
-          <h1 className='font-poppins text-3xl p-4'>"No Face , No Case"</h1>
+          <h1 className='font-poppins text-3xl p-4'>{name}</h1>
           <h1 className='font-poppins text-2xl'></h1>
-          <h1 className='font-poppins text-xl '>1299.00 den</h1>
-           <h1 className='font-poppins text-xl'>size</h1>
+          <h1 className='font-poppins text-xl '>{product_data["All Products"].find(p => p.name == name).price} den</h1>
+           <h1 className='font-poppins text-xl'>available sizes</h1>
            <div className='lg:flex lg:flex-row'>
-            <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>S</h1>
-            <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>M</h1>
-            <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>L</h1>
-            <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>XL</h1>
+           {
+            store_available.filter(sa => sa.product_id == product_data["All Products"].find(pd => pd.name == name).id).map(sa =>
+              <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>{getSize(sa.size)}</h1>
+              )
+           }
+            
             </div>
             <h1 className='font-poppins lg:p-2 lg:text-lg lg:font-bold'>quantity</h1>
             <div className='lg:flex lg:flex-row lg:items-center lg:gap-2'>
