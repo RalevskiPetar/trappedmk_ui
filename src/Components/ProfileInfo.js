@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import  BarLoader  from './BarLoader'
 import { updateUser } from '../Redux/Users/Actions'
+import { AiOutlineLock } from 'react-icons/ai'
 
 const ProfileInfo = () => {
     const { id } = useParams()
@@ -56,7 +57,8 @@ const ProfileInfo = () => {
                 </div>
             </div>
 
-            <form onSubmit={e => handleUpdate(e)} className='flex flex-col justify-center align-middle items-center h-full gap-4 pb-[3rem] pt-[5rem]'>
+            <div className='flex flex-row gap-2 w-screen'>
+            <form onSubmit={e => handleUpdate(e)} className='flex flex-col justify-center align-middle items-center h-full gap-4 pb-[3rem] pt-[5rem] w-1/2'>
                 <div className='flex flex-col justify-center w-screen items-center'>
                     <h1 className='font-poppins text-slate-400 text-center'>name</h1>
                     <input onChange={e => handleChange(e)} value={userInfo["name"]} name="name" type='text' className='outline-none text-black border-b-2 border-b-slate-300 w-5/6 lg:w-1/4 text-lg lg:text-center' placeholder={user.user.data?.user?.name} />
@@ -88,6 +90,23 @@ const ProfileInfo = () => {
               {user.user.updateStatus = ""}
                 <button  onClick={e => handleUpdate(e)} className='border-[0.1rem] border-zinc-800 p-2 font-poppins pl-4 pr-4 rounded-md  '>save</button>
             </form>
+            <div>
+                <div className='flex flex-row items-center gap-4 bg-slate-100 p-2 rounded-md'>
+                <h1 className='font-poppins text-xl'>Orders</h1>
+                <h1 className='font-poppins text-xl bg-slate-200 p-2 rounded-full'>34</h1>
+                </div>
+                <h1 className='font-poppins text-xl p-2'>Loyalty Points</h1>
+                <div class="w-full bg-gray-200 rounded-full">
+  <div className="bg-emerald-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full w-1/4"> </div>
+</div>
+                <h1 className='font-poppins text-xl p-2'>Achievements</h1>
+                <div className='flex flex-row gap-1'>
+                <AiOutlineLock className='border-slate-300 border-[0.1rem] p-1' size={50}/>
+                    <AiOutlineLock className='border-slate-300 border-[0.1rem] p-1' size={50}/>
+                    <AiOutlineLock className='border-slate-300 border-[0.1rem] p-1  ' size={50}/>
+                </div>
+            </div>
+            </div>
          <Footer />
 
         </div>

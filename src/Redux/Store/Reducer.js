@@ -49,13 +49,37 @@ export const Store_Reducer = (state = InitialState , action) => {
                     }
                 }
             case "CREATE_STORE_SUCCESS":
-                return {
-                    ...state, 
-                    store : {
-                        ...state.store,
-                        createStatus: "Success",
-                        createMessage: " ",
-                        data: [...state.store.data , action.payload.store ]
+                if (action.payload.new_store !== undefined) {
+                    return {
+                        ...state, 
+                        store : {
+                            ...state.store,
+                            createStatus: "Success",
+                            createMessage: " ",
+                            data: {
+                                ...state.store.data,
+                                stores: [
+                                    ...state.store.data.stores,
+                                    action.payload.new_store
+                                ]
+                            } 
+                        }
+                    }
+                } else {
+                    return {
+                        ...state, 
+                        store : {
+                            ...state.store,
+                            createStatus: "Success",
+                            createMessage: " ",
+                            data: {
+                                ...state.store.data,
+                                stores: [
+                                    ...state.store.data.stores.filter(s => s.id !== action.payload.store.id),
+                                    action.payload.store
+                                ]
+                            } 
+                        }
                     }
                 }
             case "CREATE_STORE_FAILURE":

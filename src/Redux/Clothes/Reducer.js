@@ -1,13 +1,13 @@
 const InitialState = {
     clothes: {
-        data: [],
+        data: [], // Ovde na primer imame podatok data sho e deklariran kako niza. //od ovde so vakov initialstate
         createStatus: " ",
         createMessage: " ",
         loadStatus: "idle",
         loadMessage: " "
     },
     categories: {
-        data: [],
+        data: [], 
         createStatus: " ",
         createMessage: " ",
         loadStatus: "idle",
@@ -35,7 +35,9 @@ export const ClothesReducer = (state = InitialState, action) => {
                 clothes: {
                     createStatus: "Success",
                     createMessage: " ",
-                    data: action.payload
+                    data: action.payload["All Products"] // Ovde namesto action.payload treba da bidi action.payload["All Clothes"] - ova vo zagradite treba da se sovpagja so to sho go vrakjame od API to
+                    // Taka se zapazuva strukturata na redux store
+                    // Ama so redux toolkit ke bidi polesno nema da imame spread operators takvi gluposti I USHTE NES
 
                 }
 
@@ -90,21 +92,29 @@ export const ClothesReducer = (state = InitialState, action) => {
                 }
             };
         case "CREATE_NEW_PRODUCT_SUCCESS":
+            console.log(action)
             return {
                 ...state,
                 clothes: {
                     ...state.clothes,
                     createStatus : "Success" ,
                     createMessage: "..." ,
-                    data: [...state.clothes.data, action.payload.clothes]
+                    data: [
+                        ...state.clothes.data,
+                        action.payload["Product"]
+                        // "All Products" : [...state.clothes.data['All Products'], action.payload["Product"]] 
+                        // kako navlegovme tolku pati 
+                    ] // zaradi sho na read products gi stavame "All Products" vnatre vo data. Mozhi to da go poprajme vaka da bidi
                 }
+            
             };
+            
         case "CREATE_NEW_PRODUCT_FAILURE":
             return {
                 ...state,
                 clothes: {
                     createStatus: "Fail",
-                    createMessage: action.payload
+                    createMessage: action.payload.clothes
                 }
             }
         case "UPDATE_PRODUCT_REQUEST":

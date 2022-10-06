@@ -16,21 +16,31 @@ export const login = async user => {
 }
 
 export const fetchAllusers = async (token) => {
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
     const requestOptions = {
+        
         "method": "GET",
-        "Authorization" : "Bearer " + token
-    }
+        headers: myHeaders,
+    } // i ova so headers
     const res = await fetch("http://127.0.0.1:5000/users", requestOptions)
-    if (res.status >= 400) throw res.json()
+    if (res.status >= 400) {
+        const e = await res.json()
+        throw e
+    } // znachi vo API calls samo ova mu go dodavash na sekoj action
     const data = await res.json()
     return data
 }
 
 export const createUser = async (user , token) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
     const requestOptions = {
         "method": "POST",
         "body": user,
-        "Authorization" : "Bearer " + token
+        headers: myHeaders,
     }
     const res = await fetch("http://127.0.0.1:5000/users", requestOptions)
     if (res.status >= 400) throw res.json()
@@ -39,10 +49,13 @@ export const createUser = async (user , token) => {
 }
 
 export const updateUser = async (user, token) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+
     const requestOptions = {
         "method": "PUT",
         "body": user,
-        "Authorization" : "Bearer " + token
+        headers: myHeaders
     }
     const res = await fetch("http://127.0.0.1:5000/users", requestOptions)
     if (res.status >= 400) throw res.json()

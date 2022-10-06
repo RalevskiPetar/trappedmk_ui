@@ -18,6 +18,7 @@ import WProducts from './Components/WProducts';
 import PorackaProizvod from './Components/PorackaProizvod';
 import { fetchMoneyTracker } from './Redux/Money/Actions';
 import { fetch_Store } from './Redux/Store/Actions';
+import { fetchOrders, fetchOrderStatuses } from './Redux/Orders/Actions';
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +28,8 @@ function App() {
     dispatch(fetchMoneyTracker())
     dispatch(fetch_Store())
     dispatch(fetchClothes())
+    dispatch(fetchOrders())
+    dispatch(fetchOrderStatuses())
   }, [])
   const userLogoutStatus = useSelector(state => state.user.user.logout)
   return (

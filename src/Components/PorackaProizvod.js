@@ -17,7 +17,8 @@ const PorackaProizvod = () => {
     else if (option == 2) return "M"
     else if (option == 3) return "L"
   }
- console.log(uniqueId)
+  
+
   return (
     <div>
         <Header />
@@ -43,13 +44,14 @@ const PorackaProizvod = () => {
           </div>
           <h1 className='font-poppins text-3xl p-4'>{name}</h1>
           <h1 className='font-poppins text-2xl'></h1>
-          <h1 className='font-poppins text-xl '>{product_data["All Products"].find(p => p.name == name).price} den</h1>
+          <h1 className='font-poppins text-xl '>{product_data.find(p => p.name == name).price} den</h1>
            <h1 className='font-poppins text-xl'>available sizes</h1>
            <div className='lg:flex lg:flex-row'>
            {
-            store_available.filter(sa => sa.product_id == product_data["All Products"].find(pd => pd.name == name).id).map(sa =>
-              <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>{getSize(sa.size)}</h1>
-              )
+            store_available.filter(sa => sa.product_id == product_data.find(pd => pd.name == name).id).map(sa =>
+               <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>{getSize(sa.size)}</h1>
+              ) 
+              
            }
             
             </div>
