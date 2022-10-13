@@ -5,17 +5,43 @@ import { RiArrowLeftSLine , RiArrowRightSLine } from 'react-icons/ri'
 import { AiFillPlusCircle, AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BiCart } from 'react-icons/bi'
 import { useParams } from 'react-router'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { create_Order } from '../Redux/Orders/Actions'
+import { BsEmojiSmile } from 'react-icons/bs'
  
 const PorackaProizvod = () => {
   const { name} = useParams()
   const product_data = useSelector(state => state.clothes.clothes.data)
   const store_available = useSelector(state => state.store.store.data.stores)
- 
+  const order_stat = useSelector(state => state.orders.order.createStatus)
+  const [selectedSize , setSelectedSize] = useState(1)
+  const selected_class = "font-poppins border-[0.1rem] border-slate-200 p-6 bg-slate-800 text-white"
+  const regular_class = "font-poppins  border-[0.1rem] border-slate-200 p-6 transition-all "
+  const user = useSelector(state => state?.user)
+  const dispatch = useDispatch()
+  console.log(user.user.data.user.id)
+
+  const [quantity , setQuantity] = useState(1)
+  const [submitted, setSubmitted] = useState(false)
+ console.log(store_available)
   const getSize = (option) => {
-    if (option == 1) return "S"
-    else if (option == 2) return "M"
-    else if (option == 3) return "L"
+    if (option == 1) return " S"
+    else if (option == 2) return " M"
+    else if (option == 3) return " L"
+    else if (option == 4) return "XL"
+  }
+  const productId = store_available.find(sa => sa.product_id == product_data.find(pd => pd.name == name).id)?.product_id
+  console.log(productId)
+  const handleCreateOrder = (e) => {
+    e.preventDefault()
+    const form = new FormData()
+    form.append("user_id" , user.user.data.user.id)
+    form.append("product_id" , productId)
+    form.append("quantity" ,  quantity)
+    form.append("order_id_stat" , 7)
+    setSubmitted(true)
+    dispatch(create_Order(form))
   }
   
 
@@ -23,7 +49,7 @@ const PorackaProizvod = () => {
     <div>
         <Header />
         
-        <div className=' p-6 overflow-x-hidden flex flex-row gap-1  justify-center items-center  pt-20  '  >
+        <form onSubmit={e => handleCreateOrder(e)} className=' p-6 overflow-x-hidden flex flex-row gap-1  justify-center items-center  pt-20  '  >
           <div className='flex flex-col items-center w-1/2'>
           <div className='lg:flex lg:flex-row lg:items-center'>
             <RiArrowLeftSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200'/>
@@ -48,8 +74,8 @@ const PorackaProizvod = () => {
            <h1 className='font-poppins text-xl'>available sizes</h1>
            <div className='lg:flex lg:flex-row'>
            {
-            store_available.filter(sa => sa.product_id == product_data.find(pd => pd.name == name).id).map(sa =>
-               <h1 className='font-poppins lg:border-[0.1rem] lg:border-slate-200 lg:p-6'>{getSize(sa.size)}</h1>
+            store_available?.filter(sa => sa.product_id == product_data.find(pd => pd.name == name).id).sort((a,b) => a.size > b.size ? 1 : -1).map(sa =>
+               <h1 onClick={e => setSelectedSize(sa.size)} className={selectedSize == sa.size ? selected_class : regular_class}>{getSize(sa.size)}</h1>
               ) 
               
            }
@@ -57,19 +83,27 @@ const PorackaProizvod = () => {
             </div>
             <h1 className='font-poppins lg:p-2 lg:text-lg lg:font-bold'>quantity</h1>
             <div className='lg:flex lg:flex-row lg:items-center lg:gap-2'>
-                <AiOutlineMinus />
-                <h1 className='lg:border-[0.1rem] lg:border-slate-200 lg:p-4 lg:rounded-sm'>23</h1>
-                <AiOutlinePlus />
+                {quantity < 1 ? 
+                <span className='w-4'></span>
+                : 
+                <AiOutlineMinus onClick={e => setQuantity(quantity - 1)} />}
+                <h1 className='lg:border-[0.1rem] lg:border-slate-200 lg:p-4 lg:rounded-sm'>{quantity}</h1>
+                <AiOutlinePlus onClick={e => setQuantity(quantity + 1)} />
                                 </div>
         </div>
         <div className='lg:flex lg:flex-row lg:justify-center lg:items-center lg:gap-10 lg:w-1/2'>
         <AiOutlineHeart  className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} />
-        <h1 className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center lg:border-[0.1rem] lg:border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'>Buy NOW</h1>
+        {order_stat === "Success" && submitted === true ? 
+        <div className='flex flex-row gap-1 items-center'>
+        <h1 className='font-poppins  text-sm'>Thank you for purchase</h1>
+        <BsEmojiSmile />
+        </div> : 
+        <button className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center lg:border-[0.1rem] lg:border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'>Buy NOW</button>}
         <BiCart  className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={30}/>
             </div>
          </div>
          
-        </div>
+        </form>
         <p className='font-poppins text-center'>• 100% cotton • Macedonian Product • TrappedMK • Clothing • Brand • T-Shirt • Gang •</p>
         <p className='font-poppins text-center'>• 100% cotton • Macedonian Product • TrappedMK • Clothing • Gang •</p>
         <p className='font-poppins text-center'>• 100% cotton • Republic of Macedonia • TrappedMK • Clothing • Brand • T-Shirt • Gang •</p>

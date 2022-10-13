@@ -36,7 +36,8 @@ const Poracki = (props) => {
         </div>
         : null}
       <div className=' h-2/12 lg:grid lg:grid-cols-4'>
-        {orders_all.filter(o => o.order_id_stat === 7).map(oa => <PorackaCard 
+        {orders_all.filter(o => o?.order_id_stat === 7).map(oa => <PorackaCard 
+          key={oa.id}
           order={oa}
           clothes={clothes}
           allusers={allusers}

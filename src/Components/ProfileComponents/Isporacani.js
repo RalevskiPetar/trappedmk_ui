@@ -9,7 +9,7 @@ const Isporacani = () => {
   const stores = useSelector(state => state.store.store.data.stores)
   return (
     <div className=' h-2/12 lg:grid lg:grid-cols-4'>
-      {orders?.map(o => o.order_id_stat === 1 ? null : <IsporacanProduct 
+      {orders?.map(o => o?.order_id_stat === 1 ? null : <IsporacanProduct 
         order={o}
         clothes={clothes}
         stores={stores}

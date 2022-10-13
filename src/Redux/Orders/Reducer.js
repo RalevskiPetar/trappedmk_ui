@@ -66,7 +66,7 @@ export const Order_Reducer = ( state = InitialState , action) => {
                     ...state.order,
                     createStatus : "Success",
                     createMessage : " ",
-                    data : [...state.order.data ,action.payload.order]
+                    data : [...state.order.data ,action.payload.Order]
                 }
                 
             }

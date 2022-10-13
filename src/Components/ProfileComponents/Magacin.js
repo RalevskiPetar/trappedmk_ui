@@ -3,34 +3,6 @@ import { BsCircle, BsCircleFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { create_Store } from '../../Redux/Store/Actions'
 import { createClothes } from '../../Redux/Clothes/Actions'
-// const group_products = products => {
-//   let ret = []
-//   let filteredRet = {}
-//   // ret = [{
-//   //   product_id : product.product_id,
-//   //   size : product.size,
-//   //   quantity : product.quantity
-//   // }
-//   for (const product of products) {
-//       filteredRet[product.product_id] = 0
-//     for(let i in product)
-//     {
-//       if(filteredRet[product.size] === undefined)
-//       {
-//         filteredRet[product.size] = 0
-//       }
-//       filteredRet[{product.size, filteredRet[product.quantity] += product.quantity}]
-
-
-      
-//     }
-//     console.log(product)
-    
-//     continue
-//     return filteredRet
-//   }
-
-// }
 
 const Magacin = () => {
   const sizes = [
@@ -54,6 +26,7 @@ const Magacin = () => {
   const product_data = useSelector(state => state.clothes.clothes.data)
   const sstore = useSelector(state => state.store.store.data.stores)
   const categories = useSelector(state => state.clothes.categories.data)
+  const _orders = useSelector(state => state.orders.order.data)
   
   // const product_quantities = group_products(_store)
   // console.log(product_quantities)
@@ -62,7 +35,6 @@ const Magacin = () => {
   const handleCreateQuantity = e => {
     e.preventDefault()
     const form = new FormData()
-    form.append("color", newProductQuantity["color"])
     form.append("product_id", clicked)
     form.append("quantity", newProductQuantity["quantity"])
     form.append("size", newProductQuantity["size"])
@@ -87,51 +59,23 @@ const Magacin = () => {
   const handleChangeProduct = e => {
     setNewProduct({...newProduct , [e.target.name] : e.target.value})
   }
-  // var result = Object.values(sstore.reduce(function(r, p) {
-
-  //   var key = p.product_id + '|' + p.size;
-  //   console.log(r[key])
-  //   if (r[key] === undefined) 
-  //   {
-  //     r[key] = p;
-  //     console.log(r[key])
-  //   }
-  //   else 
-  //   {
-  //     r[key].quantity += p.quantity;
-  //   }
-  //   return r;
-  // }, {}))
-
-  // const result = [...sstore.reduce((r, o) => {
-  //   const key = o.product_id + '-' + o.size;
-    
-  //   const item = r.get(key) || Object.assign({}, o, {
-  //     quantity: 0,
-  //   });
-    
-  //   item.quantity += o.quantity;
-  
-  //   return r.set(key, item);
-  // }, new Map).values()];
-
-  // const filteredGroup = store_array => Object.values(
-  //   store_array.reduce((acc, {product_id, size, quantity}) => {
-  //     const key = product_id + "" + size
-  //     acc[key] ??= {product_id, size, quantity: 0};
-  //     acc[key].quantity += quantity;
-  //     return acc;
-  //   }, {})
-  // );
-  console.log(newProduct)
+ 
+  console.log(_orders)
 
   const get_store_quantities = (store, orders) => {
     let pending_items = 0
     let sold_items = 0
     for (const o of orders) {
-      if (o.product_id !== store.id) continue
-      if (o.order_id_stat === 7) pending_items += o.quantity
-      else if (o.order_id_stat === 1) sold_items += o.quantity
+      if (o.product_id !== store.id) 
+          continue
+      if (o.order_id_stat === 7) 
+          {
+            pending_items += o.quantity
+          }
+      else if (o.order_id_stat === 1) 
+          {
+            sold_items += o.quantity
+          }
     }
 
 
@@ -157,7 +101,6 @@ const Magacin = () => {
             <input onChange={e => handleChange(e)} name="size" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="SIZE" />
             <p className='font-poppins text-slate-300'>( 1 = small , 2 = large  , 3 = extra-large)</p>
             <input onChange={e => handleChange(e)} name="quantity" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="QUANTITY" />
-            <input onChange={e => handleChange(e)} name="color" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="COLOR" />
             <button  onClick={e => handleCreateQuantity(e)} className='font-poppins bg-black text-white  pl-4 pr-4 p-2 rounded-sm'>CREATE PRODUCT QUANTITY</button>
           </form>
           <form onClick={e => handleChangeProduct(e)} className='flex flex-col items-center gap-2 p-2 w-1/2'>
@@ -195,15 +138,15 @@ const Magacin = () => {
         <h1 className='font-poppins text-red-400 font-bold '>SIZE : {sizes?.find(size => size.id == ss.size)?.name}</h1>
         <div className='flex flex-row gap-1 w-screen justify-center m-1'>
           <h1 className='font-poppins bg-emerald-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center '>Available</h1>
-          <h1 className='font-poppins bg-emerald-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center'>{ss.quantity}</h1>
+          <h1 className='font-poppins bg-emerald-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center'>{get_store_quantities(ss, _orders)["available"]}</h1>
         </div>
         <div className='flex flex-row gap-1 w-screen justify-center m-1'>
           <h1 className='font-poppins bg-blue-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center '>Already Sold</h1>
-          <h1 className='font-poppins bg-blue-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center'>{0}</h1>
+          <h1 className='font-poppins bg-blue-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center'>{get_store_quantities(ss, _orders)["sold"]}</h1>
         </div>
         <div className='flex flex-row gap-1 w-screen justify-center m-1'>
           <h1 className='font-poppins bg-orange-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center '>Pending</h1>
-          <h1 className='font-poppins bg-orange-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center'>{0}</h1>
+          <h1 className='font-poppins bg-orange-400 rounded-lg pl-4 pr-4 p-1 font-bold w-1/12 text-center'>{get_store_quantities(ss, _orders)["pending"]}</h1>
         </div>
       </div>)
 
