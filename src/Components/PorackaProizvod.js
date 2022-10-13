@@ -20,7 +20,7 @@ const PorackaProizvod = () => {
   const regular_class = "font-poppins  border-[0.1rem] border-slate-200 p-6 w-20 text-center transition-all "
   const user = useSelector(state => state?.user)
   const dispatch = useDispatch()
-  console.log(user.user.data.user.id)
+ 
 
   const [quantity, setQuantity] = useState(1)
   const [submitted, setSubmitted] = useState(false)

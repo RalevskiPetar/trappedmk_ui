@@ -9,7 +9,7 @@ const Odbieni = () => {
        {_orders.filter(o => o.order_id_stat == 6).map(or => 
          <div className=' p-6 flex flex-col border-b-[0.1rem] lg:border-r-[0.1rem]  lg:border-r-slate-200 border-b-slate-200 justify-center items-center'>
          <img  src='http://localhost:3000/img/bluza.png' className='w-40' />
-         <h1 className='font-poppins '>ИМЕ : "{clothes.find(c => c.id === or.product_id).name}"</h1>
+         <h1 className='font-poppins '>ИМЕ : "{clothes.find(c => c.id === or.product_id)?.name}"</h1>
          <h1 className='font-poppins text-red-400 font-bold '>СТАТУС : BLOCKED</h1>
          <h1 className='font-poppins pt-2'>ЗАБЕЛЕШКА</h1>
          <h1 className='font-poppins '>"{or.zabeleska}"</h1>
