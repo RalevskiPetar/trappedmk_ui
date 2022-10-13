@@ -1,6 +1,8 @@
+import { STATIC_URL } from "../constants"
+
 export const get_Orders = async (id = null) => {
     const append = id === null ? "  " : "?id=" + id
-    const res = await fetch("http://127.0.0.1:5000/orders")
+    const res = await fetch(STATIC_URL+"/orders")
     const data = res.json()
     return data
 }
@@ -10,7 +12,7 @@ export const create_Order = async order => {
         "method" : "POST",
         "body" : order
     }
-    const res = await fetch("http://127.0.0.1:5000/orders" , requestOptions)
+    const res = await fetch(STATIC_URL+"/orders" , requestOptions)
     const data = res.json()
     return data
 }
@@ -20,7 +22,7 @@ export const update_Order = async order => {
         "method" : "PUT",
         "body" : order
     }
-    const res = await fetch("http://127.0.0.1:5000/orders" , requestOptions)
+    const res = await fetch(STATIC_URL+"/orders" , requestOptions)
     const data = await res.json()
     console.log(data)
     return data
@@ -28,7 +30,7 @@ export const update_Order = async order => {
 
 export const get_Order_Statuses = async (id = null) => {
     const append = id === null ? " " : "?id=" + id
-    const res = await fetch("http://127.0.0.1:5000/order_statuses")
+    const res = await fetch(STATIC_URL+"/order_statuses")
     const data = res.json()
     return data
 }

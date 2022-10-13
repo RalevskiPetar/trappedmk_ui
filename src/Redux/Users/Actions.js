@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { STATIC_URL } from "../constants";
 import {
     createUser as createUserCall,
     createUser_Type as createUser_TypeCall,
@@ -16,7 +17,7 @@ export const logout = () => dispatch => dispatch({ type: "LOGOUT" })
 
 export const fetchUsers = () => async (dispatch, getState) => {
     dispatch({ type: "FETCH_USERS_REQUEST" });
-    fetchAllusers(getState().user.user.data.token)
+    fetchAllusers(getState()?.user?.user?.data?.token)
         .then(res => dispatch({ type: "FETCH_USERS_SUCCESS", payload: res }))
         .catch(e => {
             check_token_expired(
@@ -31,7 +32,7 @@ export const fetchUserTypes = () => async (dispatch, getState) => {
     dispatch({ type: "FETCH_USER_TYPES_REQUEST" });
 
     try {
-        const response = await Axios.get("http://127.0.0.1:5000/user_types");
+        const response = await Axios.get(STATIC_URL+"/user_types");
         dispatch({ type: "FETCH_USER_TYPES_SUCCESS", payload: response.data })
     }
     catch (error) {

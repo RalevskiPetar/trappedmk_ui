@@ -8,6 +8,7 @@ const PorackaCard = ({
     order,
     clothes,
     allusers,
+    store,
     user,
     order_statuses
 }) => {
@@ -27,18 +28,20 @@ const PorackaCard = ({
         }
         dispatch(update_Order(form))
     }
-    const clothing = clothes.find(c => c.id === order.product_id)
+    const store_product = store.find(s => s.id === order.product_id)
+    const clothing = clothes.find(c => c.id === store_product.product_id)
+    console.log(store_product, clothing)
     const user_info = allusers?.find(u => u.id === order.user_id)
     return (
         <form onSubmit={e => handleUpdate(e, order)} className=' p-6 flex flex-col border-b-[0.1rem] border-b-slate-200 lg:border-r-[0.1rem] lg:border-r-slate-200 justify-center  items-center'>
             {user.user.data.user.usertype_id == 1 ? <h1 className='font-poppins'>ORDER NUMBER - [{order.order_num}]</h1> : null}
             <img src='http://localhost:3000/img/bluza.png' className='w-40' />
-            <h1 className='font-poppins '>ИМЕ : "{clothes.find(c => (c.id === order.product_id)).name}"</h1>
-            <h1 className='font-poppins '>ЦЕНА : {clothes.find(c => (c.id === order.product_id)).price}ден</h1>
+            <h1 className='font-poppins '>ИМЕ : "{clothing?.name}"</h1>
+            <h1 className='font-poppins '>ЦЕНА : {clothing?.price}ден</h1>
             <h1 className='font-poppins text-yellow-500 font-bold'>СТАТУС</h1>
             {user.user.data.user.usertype_id == 1 ?
                 <ul className='font-poppins p-4 animate-fade-in-down'>
-                    {order_statuses.map(os => <li onClick={e => setClicked(os.id)} className='flex flex-row gap-2 items-center'>
+                    {order_statuses?.map(os => <li onClick={e => setClicked(os.id)} className='flex flex-row gap-2 items-center'>
                         {clicked == os.id ? <BsCircleFill /> : <BsCircle />}
                         <h1>" {os.name}"</h1>
                     </li>)}
@@ -48,16 +51,17 @@ const PorackaCard = ({
             {user.user.data.user.usertype_id == 1 ?
                 <div className='flex flex-col justify-center'>
                     <h1 className='font-poppins text-center text-lg'>INFO</h1>
-                    <h1 className='font-poppins '>name: {user_info.name + " " + user_info.surname}</h1>
-                    <h1 className='font-poppins '>phone: {user_info.phone}</h1>
-                    <h1 className='font-poppins'>city: {user_info.city}</h1>
-                    <h1 className='font-poppins '>address: {user_info.address}</h1>
+                    <h1 className='font-poppins '>name: {user_info?.name + " " + user_info?.surname}</h1>
+                    <h1 className='font-poppins '>phone: {user_info?.phone}</h1>
+                    <h1 className='font-poppins'>city: {user_info?.city}</h1>
+                    <h1 className='font-poppins '>address: {user_info?.address}</h1>
                     <h1 className='font-poppins'>date: {order.date}</h1>
                     <div className='flex flex-row gap-2'>
                         <h1 className='font-poppins'>quantity : </h1>
                         <h1 className='font-poppins' name="quantity">{order.quantity}</h1>
                     </div>
-                    <h1 className="font-poppins">gender:{clothing.gender == null ? "UniSex" : clothing.gender === 1 ? "Male" : "Female" }</h1>
+                    <h1>Size: {store_product.size}</h1>
+                    <h1 className="font-poppins">gender:{clothing?.gender == null ? "UniSex" : clothing?.gender === 1 ? "Male" : "Female" }</h1>
                     {clicked === 6 ? <input type="text" value={zabeleska} onChange={e => setZabeleska(e.target.value)} placeholder="zabeleska" className='font-poppins bg-slate-50 p-1' /> : null}
                     <button onClick={e => handleUpdate(e, order)} className='font-poppins border-[0.1rem] border-yellow-400 p-2 font-bold text-white bg-yellow-400 rounded-xl m-4  pr-4 pl-4'>SAVE</button>
                 </div>

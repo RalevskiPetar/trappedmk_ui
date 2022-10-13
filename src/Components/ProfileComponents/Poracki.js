@@ -12,6 +12,7 @@ const Poracki = (props) => {
   const allusers = useSelector(state => state.user.user.data.users)
   const clothes = useSelector(state => state.clothes.clothes.data)
   const order_statuses = useSelector(state => state.orders.order_status.data.all_order_statuses)
+  const store = useSelector(state => state.store.store.data.stores)
 
   return (
     <div className='lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg'>
@@ -41,6 +42,7 @@ const Poracki = (props) => {
           order={oa}
           clothes={clothes}
           allusers={allusers}
+          store={store}
           user={user}
           order_statuses={order_statuses}
         />)}
