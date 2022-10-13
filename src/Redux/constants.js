@@ -1,1 +1,0 @@
-export const STATIC_URL =  "http://10.11.12.132:5000/"
