@@ -31,7 +31,12 @@ export const UserReducer = (state = InitialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    logout: true
+                    logout: true,
+                    data: {
+                        ...state.user.data,
+                        user: null,
+                        token: null,
+                    }
                 }
             }
         case "FETCH_USERS_REQUEST":

@@ -30,8 +30,8 @@ const PorackaCard = ({
     }
     const store_product = store.find(s => s.id === order.product_id)
     const clothing = clothes.find(c => c.id === store_product.product_id)
-    console.log(store_product, clothing)
     const user_info = allusers?.find(u => u.id === order.user_id)
+    
     return (
         <form onSubmit={e => handleUpdate(e, order)} className=' p-6 flex flex-col border-b-[0.1rem] border-b-slate-200 lg:border-r-[0.1rem] lg:border-r-slate-200 justify-center  items-center'>
             {user.user.data.user.usertype_id == 1 ? <h1 className='font-poppins'>ORDER NUMBER - [{order.order_num}]</h1> : null}
