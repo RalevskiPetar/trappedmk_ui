@@ -12,7 +12,7 @@ const Magacin = () => {
     },
     {
       id: 2,
-      name: "MEDIUM"
+      name: "MEDIUM",
     },
     {
       id: 3,
