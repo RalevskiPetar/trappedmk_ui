@@ -31,10 +31,10 @@ const PorackaProizvod = () => {
     else if (option == 3) return " L"
     else if (option == 4) return "XL"
   }
-  const productId = store_available.find(sa => sa.product_id == product_data.find(pd => pd.name == name).id)?.product_id
-  console.log(productId)
   const handleCreateOrder = (e) => {
     e.preventDefault()
+    const current_prod = product_data.find(pd => pd.name == name)
+    const productId = store_available.find(sa => sa.product_id == current_prod.id && sa.size === selectedSize)?.id
     const form = new FormData()
     form.append("user_id", user.user.data.user.id)
     form.append("product_id", productId)

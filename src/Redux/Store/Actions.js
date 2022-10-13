@@ -1,11 +1,12 @@
 import  Axios  from "axios";
+import { API_URL } from "../constants";
 import { create_Store as create_StoreCall } from "./Api";
 
 export const fetch_Store = () => async (dispatch , getState) => {
     dispatch({type : "FETCH_STORE_REQUEST"});
 
     try{
-        const response = await Axios.get("http://127.0.0.1:5000/product_stores");
+        const response = await Axios.get(API_URL+"/product_stores");
         dispatch({type: "FETCH_STORE_SUCCESS" , payload : response.data})
     }
     catch(error){

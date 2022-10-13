@@ -21,10 +21,10 @@ const IsporacanProduct = ({
             {user.user.data.user.usertype_id == 1 ?
                 <div className='flex flex-col p-4 justify-center'>
 
-                    <h1 className='font-poppins '>name: {current_user.name} {current_user.surname} </h1>
-                    <h1 className='font-poppins '>phone: {current_user.phone}</h1>
+                    <h1 className='font-poppins '>name: {current_user?.name} {current_user?.surname} </h1>
+                    <h1 className='font-poppins '>phone: {current_user?.phone}</h1>
                     <h1 className='font-poppins'>city: Bitola</h1>
-                    <h1 className='font-poppins '>address: {current_user.address}</h1>
+                    <h1 className='font-poppins '>address: {current_user?.address}</h1>
                     <h1 className='font-poppins'> date: 13:45 12/12/2022</h1>
 
                 </div>

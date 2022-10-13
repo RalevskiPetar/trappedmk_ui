@@ -1,5 +1,6 @@
 import  Axios  from "axios";
 import { MdCatchingPokemon } from "react-icons/md";
+import { API_URL } from "../constants";
 import { get_Orders as get_OrdersCall,
          create_Order as create_OrderCall,
          get_Order_Statuses as get_Order_StatusesCall ,
@@ -10,7 +11,7 @@ export const fetchOrders = () => async(dispatch , getState) => {
     dispatch( {type : "FETCH_ORDERS_REQUEST"});
 
     try {
-        const response = await Axios.get("http://127.0.0.1:5000/orders")
+        const response = await Axios.get(API_URL+"/orders")
         dispatch({type : "FETCH_ORDERS_SUCCESS" , payload: response.data})
     }
     catch(error) {
@@ -22,7 +23,7 @@ export const fetchOrderStatuses = () => async(dispatch , getState) => {
     dispatch({type : "FETCH_ORDER_STATUSES_REQUEST"});
 
     try {
-        const response = await Axios.get("http://127.0.0.1:5000/order_statuses")
+        const response = await Axios.get(API_URL+"/order_statuses")
         dispatch({type : "FETCH_ORDER_STATUSES_SUCCESS" , payload : response.data})
     }
     catch(error){
