@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { STATIC_URL } from "../constants";
+import { API_URL } from "../constants";
 import {
     createClothes as createClothesCall, 
     createCategory as createCategoryCall,
@@ -13,7 +13,7 @@ export const fetchClothes = () => async (dispatch, getState) => {
     dispatch({ type: "FETCH_CLOTHES_REQUEST" });
 
     try {
-        const response = await Axios.get(STATIC_URL+"/clothes");
+        const response = await Axios.get(API_URL+"/clothes");
         dispatch({ type: "FETCH_CLOTHES_SUCCESS", payload: response.data })
     }
     catch (error) {
@@ -25,7 +25,7 @@ export const fetchCategories = () => async (dispatch, getState) => {
     dispatch({ type: "FETCH_CATEGORIES_REQUEST" });
 
     try {
-        const response = await Axios.get(STATIC_URL+"/categories");
+        const response = await Axios.get(API_URL+"/categories");
         dispatch({ type: "FETCH_CATEGORIES_SUCCESS", payload: response.data })
     }
     catch (error) {

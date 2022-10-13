@@ -1,5 +1,5 @@
 import Axios  from "axios";
-import { STATIC_URL } from "../constants";
+import { API_URL } from "../constants";
 import { 
     create_Money as create_MoneyCall ,
     update_Money as update_MoneyCall
@@ -9,7 +9,7 @@ export const fetchMoneyTracker = () => async (dispatch , getState) => {
     dispatch( {type: "FETCH_MONEY_TRACK_REQUEST"});
 
     try {
-        const response = await Axios.get(STATIC_URL+"/money_tracker_all");
+        const response = await Axios.get(API_URL+"/money_tracker_all");
         dispatch({ type: "FETCH_MONEY_TRACK_SUCCESS" , payload: response.data})
     }
     catch(error) {

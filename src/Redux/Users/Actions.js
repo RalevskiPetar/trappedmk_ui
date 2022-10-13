@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { STATIC_URL } from "../constants";
+import { API_URL } from "../constants";
 import {
     createUser as createUserCall,
     createUser_Type as createUser_TypeCall,
@@ -32,7 +32,7 @@ export const fetchUserTypes = () => async (dispatch, getState) => {
     dispatch({ type: "FETCH_USER_TYPES_REQUEST" });
 
     try {
-        const response = await Axios.get(STATIC_URL+"/user_types");
+        const response = await Axios.get(API_URL+"/user_types");
         dispatch({ type: "FETCH_USER_TYPES_SUCCESS", payload: response.data })
     }
     catch (error) {
