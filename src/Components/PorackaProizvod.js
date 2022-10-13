@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { create_Order } from '../Redux/Orders/Actions'
 import { BsEmojiSmile } from 'react-icons/bs'
+import { Link, NavLink } from 'react-router-dom'
 
 const PorackaProizvod = () => {
   const { name } = useParams()
@@ -115,7 +116,8 @@ const PorackaProizvod = () => {
             <h1 className='font-poppins  text-sm'>Thank you for purchase</h1>
             <BsEmojiSmile />
           </div> :
-          <button onClick={e => handleCreateOrder(e)} className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center lg:border-[0.1rem] lg:border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'>Buy NOW</button>}
+          user.user.logout === false ? <button onClick={e => handleCreateOrder(e)} className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center lg:border-[0.1rem] lg:border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'>Buy NOW</button> :
+          <NavLink to='/login' className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center lg:border-[0.1rem] lg:border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'><button >Buy NOW</button></NavLink>}
         <BiCart className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={30} />
       </div>}
         </div>
