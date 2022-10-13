@@ -35,27 +35,6 @@ const AllProducts = () => {
           <h1 className='font-poppins '>{p.description}</h1>
         </div>
        </Link>)}
-        {/* {product["All Products"].map(p => {user.user.createStatus == "Success" ? <Link to="/nfnc">
-        <div className=' p-6 overflow-x-hidden flex flex-col border-b-[0.1rem] gap-1 border-b-slate-200 justify-center items-center lg:border-r-zinc-200 lg:border-r lg:hover:opacity-80  '>
-          <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[18rem]' />
-          <h1 className='font-poppins text-lg'>"{p.name}"</h1>
-          <h1 className='font-poppins '>{p.price} den</h1>
-          <h1 className='font-poppins '>{p.description}</h1>
-        </div>
-        </Link> :<Link to="/login">
-        <div className=' p-6 overflow-x-hidden flex flex-col border-b-[0.1rem] gap-1 border-b-slate-200 justify-center items-center lg:border-r-zinc-200 lg:border-r lg:hover:opacity-80  '>
-          <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[18rem]' />
-          <h1 className='font-poppins text-lg'>" {p.price} "</h1>
-          <h1 className='font-poppins '>{p.price} den</h1>
-          <h1 className='font-poppins '>{p.description}</h1>
-        </div>
-        </Link> })} */}
-         {/* <div className=' p-6 overflow-x-hidden flex flex-col border-b-[0.1rem] gap-1 border-b-slate-200 justify-center items-center  lg:border-r-zinc-200 lg:border-r  lg:hover:opacity-80'>
-          <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[18rem]' />
-          <h1 className='font-poppins text-lg'>"TEST TEST"</h1>
-          <h1 className='font-poppins '>TEST</h1>
-          <h1 className='font-poppins '>TEST</h1>
-        </div> */}
       </div>
   <Footer />
     </div>
