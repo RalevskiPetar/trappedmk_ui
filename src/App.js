@@ -19,6 +19,8 @@ import PorackaProizvod from './Components/PorackaProizvod';
 import { fetchMoneyTracker } from './Redux/Money/Actions';
 import { fetch_Store } from './Redux/Store/Actions';
 import { fetchOrders, fetchOrderStatuses } from './Redux/Orders/Actions';
+import WishList from './Components/WishList';
+import Cart from './Components/Cart';
 
 function App() {
   const dispatch = useDispatch()
@@ -41,6 +43,8 @@ function App() {
         <Route path="/maski" element={<MProducts />} />
         <Route path="/zenski" element={<WProducts />} />
         <Route path="/novo" element={<NewProducts />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/siteproizvodi/:name" element={<PorackaProizvod />} />
         <Route path="/siteproizvodi" element={<AllProducts />} />
         {userLogoutStatus === true ? <Route path="*" element={<Navigate replace to="/login" />} /> : <Fragment>

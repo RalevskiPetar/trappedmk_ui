@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { create_Order } from '../Redux/Orders/Actions'
 import { BsEmojiSmile } from 'react-icons/bs'
 import { Link, NavLink } from 'react-router-dom'
+import DoubleBubble from './BarLoader'
 
 const PorackaProizvod = () => {
   const { name } = useParams()
@@ -110,7 +111,8 @@ const PorackaProizvod = () => {
         </div> :
         <div className='lg:flex lg:flex-row lg:justify-center lg:items-center lg:gap-10 lg:w-1/2'>
         <AiOutlineHeart className=' lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} />
-
+        {order_stat === "Wait.." ?
+        <DoubleBubble /> : null}
         {order_stat === "Success" && submitted === true ?
           <div className='flex flex-row gap-1 items-center'>
             <h1 className='font-poppins  text-sm'>Thank you for purchase</h1>

@@ -60,7 +60,7 @@ const PorackaCard = ({
                         <h1 className='font-poppins'>quantity : </h1>
                         <h1 className='font-poppins' name="quantity">{order.quantity}</h1>
                     </div>
-                    <h1>Size: {store_product.size}</h1>
+                    <h1 className="font-poppins">size: {store_product.size}</h1>
                     <h1 className="font-poppins">gender:{clothing?.gender == null ? "UniSex" : clothing?.gender === 1 ? "Male" : "Female" }</h1>
                     {clicked === 6 ? <input type="text" value={zabeleska} onChange={e => setZabeleska(e.target.value)} placeholder="zabeleska" className='font-poppins bg-slate-50 p-1' /> : null}
                     <button onClick={e => handleUpdate(e, order)} className='font-poppins border-[0.1rem] border-yellow-400 p-2 font-bold text-white bg-yellow-400 rounded-xl m-4  pr-4 pl-4'>SAVE</button>

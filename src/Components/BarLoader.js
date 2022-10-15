@@ -5,7 +5,7 @@ import react from "react";
 export default function DoubleBubble(props) {
     
     return (
-        <div className='h-screen w-screen fixed top-0 ' style={{ "backgroundColor": "rgba(0,0,0,0.50)" }}>
+        <div className='h-screen w-screen fixed top-0 left-0' style={{ "backgroundColor": "rgba(0,0,0,0.30)" }}>
             <div className="spinner-container ">
 
 <svg width="100%" viewBox="0 0 248 247" fill="none" xmlns="http://www.w3.org/2000/svg"  >
@@ -27,7 +27,7 @@ export default function DoubleBubble(props) {
     </g>
 </svg>
 
-<p className='font-poppins font-bold text-white'>UPDATING..</p>
+    <p className='font-poppins font-bold text-white text-[0.8rem]'>PROCESSING..</p>
 </div>
         </div>
 

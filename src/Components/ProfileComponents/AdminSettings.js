@@ -40,19 +40,19 @@ const AdminSettings = () => {
   console.log(selected)
   return (
     <form onSubmit={e => makeAdmin(e)} className='flex flex-col items-center w-screen overflow-x-hidden gap-3 mb-10'>
-        <h1 className='font-poppins text-slate-300 text-center p-4 '>- Make Admin -</h1>
-        <input onChange={e => setNewAdmin(e.target.value)} name="email" type="text" placeholder="email"  className="bg-slate-50 w-2/3 lg:w-1/2 font-poppins   p-2 outline-none "/>
-        <button className='border-[0.1rem] text-black font-poppins rounded-md p-2 pl-4 pr-4'>submit</button>
+        <h1 className='font-poppins text-slate-300 text-center pt-4 '>Make Admin</h1>
+        <input onChange={e => setNewAdmin(e.target.value)} name="email" type="text" placeholder="email"  className="w-2/3 lg:w-1/2 font-poppins border-[0.1rem] border-slate-200 rounded-lg  p-2 outline-none "/>
+        <button className='text-white bg-black  font-poppins rounded-md p-2 pl-4 pr-4'>submit</button>
         <h1 className='font-poppins text-slate-300 text-center p-4 '>- List of Admins -</h1>
-        <div className='flex flex-row justify-between lg:justify-center p-6 lg:p-0 w-screen'>
-            <div onClick={e => setModal(true)} className='w-1/2 lg:w-1/4 border-r border-r-slate-200 border-b border-b-200-slate'> 
+        <div className='flex flex-row justify-between lg:justify-center  p-6 lg:p-0 w-screen '>
+            <div onClick={e => setModal(true)} className='w-1/2 lg:w-1/4 border-b border-b-200-slate'> 
                 
-               <h1 className='font-poppins border-b border-b-200-slate lg:text-2xl lg:p-1 lg:border-t-[0.1rem] lg:border-l-[0.1rem] lg:border-t-slate-200'>Name</h1>  
-               {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b lg:border-l-[0.1rem] border-b-200-slate lg:text-xl lg:p-1' onClick={e => setSelected(us.name)}>{us.name}</h1>)}
+               <h1 className='font-poppins  lg:text-2xl p-3 bg-black text-white text-center rounded-tl-md '>Name</h1>  
+               {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b lg:border-l-[0.1rem] border-b-200-slate lg:text-xl lg:p-1 lg:text-center' onClick={e => setSelected(us.name)}>{us.name}</h1>)}
             </div>
             <div className='w-1/2 lg:w-1/4'>
-            <h1 className='font-poppins border-b border-b-200-slate lg:border-t-[0.1rem] lg:border-t-slate-200 lg:border-r-[0.1rem] lg:text-2xl lg:p-1'>Email</h1> 
-            {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b border-b-200-slate lg:border-r-[0.1rem] lg:text-xl lg:p-1'>{us.email}</h1>)}
+            <h1 className='font-poppins  lg:text-2xl p-3 bg-black text-white text-center rounded-tr-md'>Email</h1> 
+            {users?.filter(u => u.usertype_id == 1).map(us => <h1 className='font-poppins text-sm border-b border-b-200-slate lg:border-r-[0.1rem] lg:text-xl lg:p-1 lg:text-center'>{us.email}</h1>)}
             </div>
             
         </div>
@@ -62,10 +62,10 @@ const AdminSettings = () => {
                 <div>
                     <h1 className='font-poppins text-red-500 text-center font-bold'>Are you sure that you want to remove {selected} from the admin list?</h1>
                 </div>
-               <div className='flex flex-col lg:flex lg:flex-row lg:p-4 lg:justify-center '>
-               <button onClick={e => removeAdmin(e) || setModal(false)} className='font-poppins bg-zinc-900 text-white pr-4 pl-4 rounded-md p-2 mt-2 lg:mt-3 lg:w-1/6'>YES</button>
-                <h1 className='font-poppins text-center p-4'>or</h1>
-                <button onClick={e => setModal(false)} className='font-poppins border-[0.1rem] border-zinc-900 text-zinc-900 p-2 pr-4 pl-4 rounded-md lg:mt-3 lg:w-1/6 '>NO</button>
+               <div className='flex flex-col lg:flex lg:flex-row lg:p-4 lg:justify-center lg:items-center  '>
+               <button onClick={e => removeAdmin(e) || setModal(false)} className='font-poppins bg-zinc-900 text-white pr-4 pl-4 rounded-md p-2 mt-2 lg:mt-3 lg:w-1/6 lg:font-bold'>YES</button>
+                <h1 className='font-poppins text-center pl-4 pr-4 font-bold'>or</h1>
+                <button onClick={e => setModal(false)} className='font-poppins border-[0.1rem] border-zinc-900 text-zinc-900 p-2 pr-4 pl-4 rounded-md lg:mt-3 lg:w-1/6 lg:font-bold '>NO</button>
                </div>
                 
             </div>
