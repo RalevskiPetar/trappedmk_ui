@@ -102,7 +102,7 @@ export const wishlistApi = {
         const requestOptions = {
             "method": "POST", "body": wishlist, headers: myHeaders
         }
-        const res = await fetch(API_URL + "/wishlistcart", requestOptions)
+        const res = await fetch(API_URL + "/wishlist", requestOptions)
         if (res.status >= 400) {
             const e = await res.json()
             throw e
