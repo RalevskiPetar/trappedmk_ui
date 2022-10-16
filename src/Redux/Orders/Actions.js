@@ -7,10 +7,12 @@ import {
     get_Order_Statuses as get_Order_StatusesCall,
     update_Order as update_OrderCall,
     cartApi,
-    wishlistApi
+    wishlistApi,
+    OrderFromCart
 } from "./Api";
 
 const check_token_expired = (e, default_action, dispatch) => {
+    console.log(e)
     if (e?.msg === "Token has expired") dispatch({ type: "LOGOUT" })
     else dispatch(default_action)
 }
@@ -115,4 +117,17 @@ export const WishlistActions = {
                 e, { type: "DELETE_WISHLIST_FAILURE", payload: e }, dispatch
             ))
     },
+}
+
+
+export const orderFromCart = cart => (dispatch, getState) => {
+    dispatch({ type: "ORDER_FROM_CART_REQUEST" })
+    OrderFromCart(cart, getState()?.user?.user?.data?.token)
+        .then(res => {
+            console.log(res)
+            dispatch({ type: "ORDER_FROM_CART_SUCCESS", payload: res })
+        })
+        .catch(e => check_token_expired(
+            e, { type: "ORDER_FROM_CART_FAILURE", payload: e }, dispatch
+        ))
 }

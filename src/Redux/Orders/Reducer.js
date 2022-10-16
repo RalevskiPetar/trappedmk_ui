@@ -27,6 +27,8 @@ const InitialState = {
     },
     cart: {
         data: [],
+        createOrderStatus: "",
+        createOrderMessage: "",
         createStatus: "",
         createMessage: "",
         loadStatus: "",
@@ -161,10 +163,38 @@ export const Order_Reducer = (state = InitialState, action) => {
             }
 
 
-
-
-
-
+        case "ORDER_FROM_CART_REQUEST":
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    createOrderStatus: "pending",
+                    createOrderMessage: "Creating order... Please wait."
+                }
+            }
+        case "ORDER_FROM_CART_SUCCESS":
+            return {
+                ...state,
+                order: {
+                    ...state.order,
+                    data: [...state.order.data, ...action.payload.orders]
+                },
+                cart: {
+                    ...state.cart,
+                    data: [...state.cart.data.filter(cart_item => action.payload.removed_cart_items.includes(cart_item.id) === false)],
+                    createOrderStatus: "success",
+                    createOrderMessage: "Order created successfully."
+                }
+            }
+        case "ORDER_FROM_CART_REQUEST":
+            return {
+                ...state,
+                cart: {
+                    ...state.cart,
+                    createOrderStatus: "error",
+                    createOrderMessage: "Error creating your order."
+                }
+            }
 
         case "CREATE_CART_REQUEST":
             return {

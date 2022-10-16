@@ -85,7 +85,7 @@ export const cartApi = {
         const requestOptions = {
             "method": "DELETE", headers: myHeaders
         }
-        const res = await fetch(API_URL + "/cart?id="+id, requestOptions)
+        const res = await fetch(API_URL + "/cart?id=" + id, requestOptions)
         if (res.status >= 400) {
             const e = await res.json()
             throw e
@@ -130,7 +130,7 @@ export const wishlistApi = {
         const requestOptions = {
             "method": "DELETE", headers: myHeaders
         }
-        const res = await fetch(API_URL + "/wishlist?id="+id, requestOptions)
+        const res = await fetch(API_URL + "/wishlist?id=" + id, requestOptions)
         if (res.status >= 400) {
             const e = await res.json()
             throw e
@@ -138,4 +138,21 @@ export const wishlistApi = {
         const data = await res.json()
         return data
     },
+}
+
+
+export const OrderFromCart = async (cart, token) => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer " + token);
+    const requestOptions = {
+        "method": "POST", "body": cart, headers: myHeaders
+    }
+    const res = await fetch(API_URL + "/order_from_cart", requestOptions)
+    if (res.status >= 400) {
+        const e = await res.json()
+        throw e
+    }
+    const data = await res.json()
+    console.log(data)
+    return data
 }
