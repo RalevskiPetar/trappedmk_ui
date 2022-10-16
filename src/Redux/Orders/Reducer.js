@@ -177,7 +177,7 @@ export const Order_Reducer = (state = InitialState, action) => {
                 ...state,
                 order: {
                     ...state.order,
-                    data: [...state.order.data, ...action.payload.orders]
+                    data: action.payload.orders instanceof Array ? [...state.order.data, ...action.payload.orders] : [...state.order.data, action.payload.orders]
                 },
                 cart: {
                     ...state.cart,
@@ -240,7 +240,7 @@ export const Order_Reducer = (state = InitialState, action) => {
                     ...state.cart,
                     loadStatus: "success",
                     loadMessage: "Items loaded successfully.",
-                    data: action.payload.items
+                    data: action.payload.items instanceof Array ? action.payload.items : [action.payload.items]
                 }
             }
         case "LOAD_CART_FAILURE":

@@ -1,19 +1,27 @@
 import React, { useState } from 'react'
-import { FiMenu, FiLogIn } from 'react-icons/fi'
-import { AiOutlineHeart, AiOutlineUser, AiOutlineClose } from 'react-icons/ai'
+import { FiMenu } from 'react-icons/fi'
+import { AiOutlineHeart, AiOutlineUser } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import { BsCart } from 'react-icons/bs'
 import NavMenu from './NavMenu'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
   const user = useSelector(state => state.user)
   const wishlistItems = useSelector(state => state.orders.wishlist.data)
+  const cartReducer = useSelector(state => state.orders.cart.data)
+
   const [expanded, setExpanded] = useState(false)
+
   const regular_class = "relative -top-2"
   const active_class = "relative -top-0"
-  const wishlistTotal = wishlistItems.filter(w => w.user_id === user.user.data?.user.id ).length
+
+  const wishlistTotal = wishlistItems.filter(w => w.user_id === user.user.data?.user.id).length
+  const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user.id).length
+
+
+
   return (
     <div className='fixed bg-zinc-900 flex flex-row items-center justify-between p-2 lg:z-20 w-screen'>
       {expanded == false ? <FiMenu onClick={e => setExpanded(!expanded)} color='white' size={20} className="w-[5rem] lg:w-[8rem] lg:hidden" /> :
@@ -32,11 +40,15 @@ const Header = () => {
         </div>
       </Link>
       <div className='flex flex-row w-[5rem] lg:w-1/6 gap-3 items-center lg:flex lg:flex-row lg:justify-end lg:pr-2'>
-        <BsCart className='' color='white' size={22} />
+      <div>
+        {cartTotal === 0 ? null : <span className=' relative -top-0 items-center z-10 -right-4 bg-red-500 w-4 h-4 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{cartTotal}</span>}
+        <BsCart className={cartTotal === 0 ? active_class : regular_class} color='white' size={22} />
+
+      </div>
 
         <div>
-        {wishlistTotal === 0 ? null : <span className=' relative -top-0 items-center z-10 -right-4 bg-red-500 w-4 h-4 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlistTotal}</span>}
-        <AiOutlineHeart className={wishlistTotal === 0 ? active_class : regular_class } color="white" size={22} />
+          {wishlistTotal === 0 ? null : <span className=' relative -top-0 items-center z-10 -right-4 bg-red-500 w-4 h-4 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlistTotal}</span>}
+          <AiOutlineHeart className={wishlistTotal === 0 ? active_class : regular_class} color="white" size={22} />
         </div>
         {user.user.createStatus == "Success" ? <Link to="/profile"><AiOutlineUser color='white' size={21} /></Link> : <Link to="/login"><AiOutlineUser color='white' size={21} /></Link>}
       </div>

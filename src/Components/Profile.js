@@ -23,12 +23,15 @@ import { GiPayMoney } from 'react-icons/gi'
 import Rasprodazba from './ProfileComponents/Rasprodazba'
 import { useSelector } from 'react-redux'
 import { BiDownArrow } from 'react-icons/bi'
+import CartContainer from './Cart/CartContainer'
 
 
 
 const Profile = () => {
     const numPoracki = 1
     const user = useSelector(state => state?.user)
+    const cartReducer = useSelector(state => state.orders.cart.data)
+    const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user.id).length
     console.log(user)
     const menu = [
         {
@@ -99,7 +102,7 @@ const Profile = () => {
         else if (option == "Испорачани") return <Isporacani />
         else if (option == "Одбиени") return <Odbieni />
         else if (option == "Омилени") return <Omileni />
-        else if (option == "Кошничка") return <Kosnicka />
+        else if (option == "Кошничка") return <CartContainer />
         else if (option == "Инфо") return <Info />
         else if (option == "Заработка") return <Zarabotka />
         else if (option == "Магацин") return <Magacin />
@@ -178,7 +181,7 @@ const Profile = () => {
                                 <h1 className='font-poppins text-[1rem] text-white '>Омилени</h1>
                             </div>
                             <div onClick={e => setColor(5)} className='flex flex-col lg:w-1/4 gap-2 w-screen items-center'>
-                                <span className='relative top-6 z-10 -right-7 bg-red-500 w-7 h-7 flex justify-center items-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>1</span>
+                                <span className='relative top-6 z-10 -right-7 bg-red-500 w-7 h-7 flex justify-center items-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{cartTotal}</span>
                                 <div className='lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg flex flex-col items-center w-2/4 gap-2  p-4 rounded-lg lg:shadow-xl '>
 
                                     <BsCart color='white' size={30} />

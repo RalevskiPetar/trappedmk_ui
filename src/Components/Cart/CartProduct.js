@@ -7,6 +7,8 @@ import { CartActions } from "../../Redux/Orders/Actions"
 const sizes = ["S", "M", "L", "XL"]
 const CartProduct = ({
     cart_item,
+    selected,
+    setSelected,
     storeReducer,
     clothesReducer
 }) => {
@@ -31,6 +33,10 @@ const CartProduct = ({
         e.preventDefault()
         dispatch(CartActions.delete(cart_item.id))
     }
+    const toggleSelected = e => {
+        if (selected.includes(cart_item.id)) setSelected(selected.filter(i => i !== cart_item.id))
+        else setSelected([...selected, cart_item.id])
+    }
 
     return (
         <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
@@ -40,8 +46,8 @@ const CartProduct = ({
             </div>
             <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                 <div className="flex items-center justify-between w-full">
-                    <p className="text-base font-black leading-none text-gray-800">{product.name}</p>
-                    <div className='lg:flex lg:flex-row lg:items-center lg:gap-2'>
+                    <p className="text-lg font-black leading-none text-gray-800">{product.name}</p>
+                    <div className='flex items-center gap-2'>
                         {quantity == 1 ?
                             <span className='w-4'></span>
                             :
@@ -52,6 +58,10 @@ const CartProduct = ({
                 </div>
                 <p className="text-xs leading-3 text-gray-600 pt-2">Големина: {sizes[current_store.size - 1]}</p>
                 <div className="flex items-center justify-between pt-5">
+                    <div>
+                        <input type="checkbox" onChange={e => toggleSelected(e)} value={selected.includes(cart_item.id)} />
+                        <label className="text-slate-800 ml-4">Додај во нарачка</label>
+                    </div>
                     <div className="flex itemms-center">
                         <p onClick={e => handleDelete(e)} className="text-xs leading-3 underline text-red-500 cursor-pointer">Избриши</p>
                     </div>

@@ -18,7 +18,7 @@ import WProducts from './Components/WProducts';
 import PorackaProizvod from './Components/PorackaProizvod';
 import { fetchMoneyTracker } from './Redux/Money/Actions';
 import { fetch_Store } from './Redux/Store/Actions';
-import { fetchOrders, fetchOrderStatuses, WishlistActions } from './Redux/Orders/Actions';
+import { CartActions, fetchOrders, fetchOrderStatuses, WishlistActions } from './Redux/Orders/Actions';
 import WishList from './Components/WishList';
 import Cart from './Components/Cart';
 import CartContainer from './Components/Cart/CartContainer';
@@ -35,6 +35,7 @@ function App() {
     dispatch(fetchOrders())
     dispatch(fetchOrderStatuses())
     dispatch(WishlistActions.read())
+    dispatch(CartActions.read())
   }, [])
   const userLogoutStatus = useSelector(state => state.user.user.logout)
   return (
