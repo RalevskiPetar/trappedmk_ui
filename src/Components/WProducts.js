@@ -12,22 +12,22 @@ const WProducts = () => {
     const category = useSelector(state => state.clothes.categories.data)
     const clothes = useSelector(state => state.clothes.clothes.data)
     return (
-      <div>
+      <div className='w-screen'>
         <Header />
-        <div className='flex flex-row justify-between font-poppins w-screen pt-14 overflow-x-scroll lg:overflow-x-hidden'>
+        <div className='flex flex-row justify-around font-poppins w-screen pt-14 overflow-x-scroll lg:overflow-x-hidden'>
           {category.map(c => <h1 className='p-4  text-sm'>{c.name}</h1>)}
   
         </div>
   
-        <h1 className='font-poppins text-slate-300 text-sm text-center p-2'>- повлечи од десно на лево -</h1>
+        <h1 className='font-poppins text-slate-300 text-sm text-center p-2 lg:hidden'>- повлечи од десно на лево -</h1>
   
-        <div className='flex flex-row  gap-2 text-red-500 font-poppins justify-center p-4 '>
+        <div className='lg:grid lg:grid-cols-4 lg:w-screen '>
         {clothes?.filter(c => c.gender === 2)?.map(p => <Link to={`/zenski/${p.name}`}>
-        <div  className=' p-6 overflow-x-hidden flex flex-col border-b-[0.1rem] gap-1 border-b-slate-200 justify-center items-center lg:border-r-zinc-200 lg:border-r lg:hover:opacity-80  '>
+        <div  className=' p-6 overflow-x-hidden flex flex-col border-b-[0.1rem] gap-1 border-b-slate-200 border-l-[0.1rem] border-l-slate-200  justify-center items-center lg:border-r-zinc-200 lg:border-r lg:hover:opacity-80lg:border-t-[0.1rem] lg:border-t-slate-50  '>
           <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[18rem]' />
-          <h1 className='font-poppins text-lg'>" {p.name} "</h1>
-          <h1 className='font-poppins '>{p.price} den</h1>
-          <h1 className='font-poppins '>{p.description}</h1>
+          <h1 className='font-poppins text-lg text-black'>" {p.name} "</h1>
+          <h1 className='font-poppins text-black '>{p.price} den</h1>
+          <h1 className='font-poppins  text-black'>{p.description}</h1>
         </div>
        </Link>)}
         </div>

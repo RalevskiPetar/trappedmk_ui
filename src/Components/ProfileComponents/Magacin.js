@@ -5,6 +5,7 @@ import { create_Store } from '../../Redux/Store/Actions'
 import { createClothes } from '../../Redux/Clothes/Actions'
 import { AiOutlineCiCircle } from 'react-icons/ai'
 import { BiRadioCircle, BiRadioCircleMarked } from 'react-icons/bi'
+import DoubleBubble from '../BarLoader'
 
 const Magacin = () => {
   const sizes = [
@@ -37,6 +38,8 @@ const Magacin = () => {
   const clicked_class = "border-[0.1rem] bg-slate-400 border-slate-200 p-1 pl-2 pr-2 font-poppins text-white"
   const [newProductQuantity, setNewProductQuantity] = useState("")
   const dispatch = useDispatch()
+  
+
   const handleCreateQuantity = e => {
     e.preventDefault()
     const form = new FormData()
@@ -88,11 +91,11 @@ const Magacin = () => {
       "sold": sold_items,
       "available": store.quantity - (pending_items + sold_items)
     }
-
+ 
   }
   return (
     <div>
-      <h1 onClick={e => setCreateProduct(!createProduct)} className='font-poppins text-center font-bold p-2 cursor-pointer'>• CREATE PRODUCT QUANTITY • CREATE PRODUCT •</h1>
+      <h1 onClick={e => setCreateProduct(!createProduct)} className='font-poppins text-center font-bold p-2 cursor-pointer'>• CREATE PRODUCT AND PRODUCT QUANTITY •</h1>
       {createProduct == true ?
         <div className='flex flex-row w-screen'>
           <form onSubmit={e => handleCreateQuantity(e)} className='flex flex-col items-center gap-2 p-2 w-1/2'>

@@ -28,16 +28,12 @@ const Poracki = (props) => {
               {selected == 2 ? <BsCircleFill /> : <BsCircle />}
               <h1>  LATEST</h1>
             </li>
-            <li onClick={e => setSelected(4)} className='flex flex-row gap-2 items-center lg:justify-center'>
-              {selected == 4 ? <BsCircleFill /> : <BsCircle />}
-              <h1> A - W </h1>
-            </li>
 
           </ul>
         </div>
         : null}
       <div className=' h-2/12 lg:grid lg:grid-cols-4'>
-        {orders_all.filter(o => o?.order_id_stat === 7).map(oa => <PorackaCard 
+        {orders_all.filter(o => o?.order_id_stat === 7).sort((a,b) => a.id > b.id ? -1 : 1).map(oa => <PorackaCard 
           key={oa.id}
           order={oa}
           clothes={clothes}
