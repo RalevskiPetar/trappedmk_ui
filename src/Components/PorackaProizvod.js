@@ -2,12 +2,12 @@ import React from 'react'
 import Footer from '../Footer'
 import Header from './Header'
 import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri'
-import { AiFillPlusCircle, AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { AiFillHeart, AiFillPlusCircle, AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BiCart } from 'react-icons/bi'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { create_Order } from '../Redux/Orders/Actions'
+import { create_Order, WishlistActions } from '../Redux/Orders/Actions'
 import { BsEmojiSmile } from 'react-icons/bs'
 import { Link, NavLink } from 'react-router-dom'
 import DoubleBubble from './BarLoader'
@@ -21,9 +21,8 @@ const PorackaProizvod = () => {
   const selected_class = "font-poppins border-[0.1rem] border-slate-200 p-6 w-20 text-center bg-slate-800 text-white"
   const regular_class = "font-poppins  border-[0.1rem] border-slate-200 p-6 w-20 text-center transition-all "
   const user = useSelector(state => state?.user)
+  const wishlistItems = useSelector(state => state.orders.wishlist.data)
   const dispatch = useDispatch()
- 
-
   const [quantity, setQuantity] = useState(1)
   const [submitted, setSubmitted] = useState(false)
   console.log(store_available)
@@ -33,6 +32,18 @@ const PorackaProizvod = () => {
     else if (option == 3) return " L"
     else if (option == 4) return "XL"
   }
+  const current_prod = product_data.find(pd => pd.name == name)
+    const productId = store_available.find(sa => sa.product_id == current_prod.id)?.id
+  const handleCreateWishListItem = e => {
+    const current_prod = product_data.find(pd => pd.name == name)
+    const productId = store_available.find(sa => sa.product_id == current_prod.id)?.id
+    e.preventDefault()
+    const form = new FormData()
+    form.append("user_id" , user.user.data.user.id)
+    form.append("store_id" , productId)
+    dispatch(WishlistActions.create(form))
+  }
+
   const handleCreateOrder = (e) => {
     e.preventDefault()
     const current_prod = product_data.find(pd => pd.name == name)
@@ -110,7 +121,10 @@ const PorackaProizvod = () => {
           <BiCart className='text-slate-400 cursor-not-allowed  ' size={30} />
         </div> :
         <div className='lg:flex lg:flex-row lg:justify-center lg:items-center lg:gap-10 lg:w-1/2'>
-        <AiOutlineHeart className=' lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} />
+       {wishlistItems.find(it => it.store_id == productId && it.user_id === user.user.data.user.id ) ?
+        <AiFillHeart onClick={e => dispatch(WishlistActions.delete(wishlistItems.find(it => it.store_id == productId && it.user_id === user.user.data.user.id).id))}  className=' lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} /> :
+        <AiOutlineHeart onClick={e => handleCreateWishListItem(e)} className=' lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} /> }
+       
         {order_stat === "Wait.." ?
         <DoubleBubble /> : null}
         {order_stat === "Success" && submitted === true ?
