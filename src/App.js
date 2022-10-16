@@ -21,6 +21,7 @@ import { fetch_Store } from './Redux/Store/Actions';
 import { fetchOrders, fetchOrderStatuses, WishlistActions } from './Redux/Orders/Actions';
 import WishList from './Components/WishList';
 import Cart from './Components/Cart';
+import CartContainer from './Components/Cart/CartContainer';
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
         <Route path="/zenski/:name" element={<PorackaProizvod />} />
         <Route path="/novo" element={<NewProducts />} />
         <Route path="/wishlist" element={<WishList />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<CartContainer />} />
         <Route path="/siteproizvodi/:name" element={<PorackaProizvod />} />
         <Route path="/siteproizvodi" element={<AllProducts />} />
         {userLogoutStatus === true ? <Route path="*" element={<Navigate replace to="/login" />} /> : <Fragment>

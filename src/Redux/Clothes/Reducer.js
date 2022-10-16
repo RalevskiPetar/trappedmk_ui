@@ -24,8 +24,8 @@ export const ClothesReducer = (state = InitialState, action) => {
                 ...state,
                 clothes: {
                     ...state.clothes,
-                    createStatus: "pending",
-                    createMessage: "Loading clothes .... please wait!"
+                    loadStatus: "pending",
+                    loadMessage: "Loading clothes .... please wait!"
 
                 }
             };
@@ -33,8 +33,8 @@ export const ClothesReducer = (state = InitialState, action) => {
             return {
                 ...state,
                 clothes: {
-                    createStatus: "Success",
-                    createMessage: " ",
+                    loadStatus: "Success",
+                    loadMessage: " ",
                     data: action.payload["All Products"] // Ovde namesto action.payload treba da bidi action.payload["All Clothes"] - ova vo zagradite treba da se sovpagja so to sho go vrakjame od API to
                     // Taka se zapazuva strukturata na redux store
                     // Ama so redux toolkit ke bidi polesno nema da imame spread operators takvi gluposti I USHTE NES
@@ -46,8 +46,8 @@ export const ClothesReducer = (state = InitialState, action) => {
             return {
                 ...state,
                 clothes: {
-                    createStatus: "Fail",
-                    createMessage: action.payload
+                    loadStatus: "Fail",
+                    loadMessage: action.payload
                 }
 
             };

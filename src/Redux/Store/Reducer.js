@@ -15,8 +15,8 @@ export const Store_Reducer = (state = InitialState , action) => {
                     ...state,
                     store : {
                         ...state.store,
-                        createStatus : "Pending",
-                        createMessage : "Please wait ..."
+                        loadStatus : "pending",
+                        loadMessage : "Please wait ..."
                     }
 
                 }
@@ -24,8 +24,8 @@ export const Store_Reducer = (state = InitialState , action) => {
                 return {
                     ...state,
                     store : {
-                        createStatus: "Success",
-                        createMessage: " ",
+                        loadStatus: "Success",
+                        loadMessage: " ",
                         data: action.payload
                     }
                         
@@ -35,8 +35,8 @@ export const Store_Reducer = (state = InitialState , action) => {
                     ...state,
                     store: {
                         ...state.store,
-                        createStatus: "Fail",
-                        createMessage: action.payload,
+                        loadStatus: "Fail",
+                        loadMessage: action.payload,
                     }
                 }
             case "CREATE_STORE_REQUEST":
