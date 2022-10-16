@@ -2,6 +2,7 @@ import { m } from 'framer-motion'
 import React, { useState } from 'react'
 import { GiClothesline } from 'react-icons/gi'
 import { useSelector } from 'react-redux'
+import DoubleBubble from '../BarLoader'
 import DodajSuma from './DodajSuma'
 import Meseci from './Meseci'
 
@@ -61,6 +62,7 @@ const Zarabotka = () => {
   const [calendar, setCalendar] = useState(false)
   const [mesec, setMesec] = useState(7)
   const money_logs = useSelector(state => state.money.money_tracker.data)
+  const money_logs_messages = useSelector(state => state.money.money_tracker)
   const orders = useSelector(state => state.orders.order.data)
   const products = useSelector(state => state.clothes.clothes.data)
   const store = useSelector(state => state.store.store.data.stores)
@@ -73,6 +75,8 @@ const Zarabotka = () => {
   money_logs?.filter(m => m.type_id == 2 && m.date.slice(8, 11) === months.find(me => me.id === mesec).month).map(ml => odliv_suma += ml.ammount)
   money_logs?.filter(m => m.type_id == 1 && m.date.slice(8, 11) === months.find(me => me.id === mesec).month).map(ml => priliv_suma += ml.ammount)
   console.log(clothes_priliv_suma)
+  if (money_logs_messages.createStatus === "Pending") return <DoubleBubble speed={1} message="Loading.." />
+
   return (
     <div className='flex flex-col'>
       <h1 onClick={e => setCalendar(true)} className='font-poppins text-center p-2 bg-slate-100 shadow-md cursor-pointer'>IZBERI MESEC</h1>

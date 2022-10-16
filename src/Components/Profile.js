@@ -30,8 +30,13 @@ import CartContainer from './Cart/CartContainer'
 const Profile = () => {
     const numPoracki = 1
     const user = useSelector(state => state?.user)
+<<<<<<< HEAD
     const cartReducer = useSelector(state => state.orders.cart.data)
     const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user.id).length
+=======
+    const user_info = useSelector(state => state.user.user.data?.user)
+    const wishlist_total = useSelector(state => state.orders.wishlist.data)
+>>>>>>> bf23565a7ac926c8a62328bf8b24a9a8a0c7d3d9
     console.log(user)
     const menu = [
         {
@@ -173,7 +178,7 @@ const Profile = () => {
                         </div>
                         <div className='flex flex-row justify-around  p-2 items-center lg:w-1/3'>
                             <div onClick={e => setColor(4)} className='flex flex-col lg:w-1/4 gap-2 w-screen items-center'>
-                                <span className=' relative top-6 items-center z-10 -right-7 bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>3</span>
+                                <span className=' relative top-6 items-center z-10 -right-7 bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlist_total.filter(w => w.user_id === user_info.id).length}</span>
                                 <div className='lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg flex flex-col items-center w-2/4 gap-2   p-4 rounded-lg lg:shadow-xl'>
 
                                     <AiOutlineHeart color='white' size={30} />
