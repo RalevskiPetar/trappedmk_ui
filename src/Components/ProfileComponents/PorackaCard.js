@@ -31,6 +31,7 @@ const PorackaCard = ({
     const store_product = store.find(s => s.id === order.product_id)
     const clothing = clothes.find(c => c.id === store_product.product_id)
     const user_info = allusers?.find(u => u.id === order.user_id)
+    console.log(user_info)
     
     return (
         <form onSubmit={e => handleUpdate(e, order)} className=' p-6 flex flex-col border-b-[0.1rem] border-b-slate-200 lg:border-r-[0.1rem] lg:border-r-slate-200 justify-center  items-center'>
