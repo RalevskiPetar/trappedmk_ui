@@ -30,13 +30,11 @@ import CartContainer from './Cart/CartContainer'
 const Profile = () => {
     const numPoracki = 1
     const user = useSelector(state => state?.user)
-<<<<<<< HEAD
-    const cartReducer = useSelector(state => state.orders.cart.data)
-    const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user.id).length
-=======
     const user_info = useSelector(state => state.user.user.data?.user)
+    const cartReducer = useSelector(state => state.orders.cart.data)
+    
+    const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user.id).length
     const wishlist_total = useSelector(state => state.orders.wishlist.data)
->>>>>>> bf23565a7ac926c8a62328bf8b24a9a8a0c7d3d9
     console.log(user)
     const menu = [
         {
@@ -117,7 +115,7 @@ const Profile = () => {
 
     }
     const orders = useSelector(state => state.orders.order.data)
-    
+
     return (
 
         <div >
@@ -131,8 +129,8 @@ const Profile = () => {
                     </Link>
                     <img src='http://localhost:3000/img/logo.png' className='w-[5rem]' />
                     <div className='flex flex-row gap-2 items-center'>
-                        
-                        
+
+
                         <Link to="/profile/edit"><h1 className='font-poppins text-white'>Edit info</h1></Link>
                         <FiSettings color="white" />
                     </div>
@@ -152,7 +150,7 @@ const Profile = () => {
                                 <h1 className='font-poppins text-[1rem]  text-white'>Порачки</h1>
                             </div>
                             <div onClick={e => setColor(2)} className='flex flex-col gap-2 w-screen lg:w-1/4 items-center'>
-                            {orders.filter(o => o?.order_id_stat == 1).length == 0 ?
+                                {orders.filter(o => o?.order_id_stat == 1).length == 0 ?
                                     <span className='relative top-6 z-10 -right-7 items-center  w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'></span>
                                     :
                                     <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders.filter(o => o?.order_id_stat == 1).length}</span>}
@@ -164,7 +162,7 @@ const Profile = () => {
                             </div>
                             <div onClick={e => setColor(3)} className='flex flex-col gap-2 lg:w-1/4 w-screen items-center'>
 
-                            {orders.filter(o => o?.order_id_stat == 6).length == 0 ?
+                                {orders.filter(o => o?.order_id_stat == 6).length == 0 ?
                                     <span className='relative top-6 z-10 -right-7 items-center  w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'></span>
                                     :
                                     <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders.filter(o => o?.order_id_stat == 6).length}</span>}
@@ -204,7 +202,7 @@ const Profile = () => {
                         </div>
 
                     </div>
-                    
+
                     {user.user.data.user?.usertype_id == 1 ?
 
                         <div className='flex flex-col w-screen '>
