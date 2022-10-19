@@ -4,7 +4,7 @@ import Header from './Header'
 import { BiArrowBack, BiStore } from 'react-icons/bi'
 import { MdBlock, MdOutlineMoneyOffCsred } from 'react-icons/md'
 import { RiTShirtLine } from 'react-icons/ri'
-import { BsTruck, BsCart, BsInfoCircle } from 'react-icons/bs'
+import { BsTruck, BsCart, BsInfoCircle, BsImages } from 'react-icons/bs'
 import { AiOutlineHeart, AiOutlineDollarCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { TbDeviceAnalytics } from 'react-icons/tb'
@@ -243,7 +243,7 @@ const Profile = () => {
                                 <div onClick={e => setColor(11)} className='flex flex-col  lg:w-1/4 gap-2 w-screen items-center lg:mb-4'>
                                     <span className='relative top-6 -right-7  w-7 h-7 flex justify-center text-white font-poppins align-middle rounded-full'></span>
                                     <div className='flex flex-col items-center w-2/4 gap-2 p-2 rounded-md '>
-                                        <GiPayMoney color='white' size={25} />
+                                        <BsImages color='white' size={25} />
                                     </div>
                                     <h1 className='font-poppins text-[0.8rem] text-white '>Слики</h1>
                                 </div>
