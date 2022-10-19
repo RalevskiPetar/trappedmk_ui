@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiOutlineUser } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import { BsCart } from 'react-icons/bs'
 import NavMenu from './NavMenu'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Header = () => {
@@ -42,13 +42,13 @@ const Header = () => {
       <div className='flex flex-row w-[5rem] lg:w-1/6 gap-3 items-center lg:flex lg:flex-row lg:justify-end lg:pr-2'>
       <div>
         {cartTotal === 0 ? null : <span className=' relative -top-0 items-center z-10 -right-4 bg-red-500 w-4 h-4 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{cartTotal}</span>}
-        <BsCart className={cartTotal === 0 ? active_class : regular_class} color='white' size={22} />
+        <NavLink to="/cart"><BsCart className={cartTotal === 0 ? active_class : regular_class} color='white' size={22} /></NavLink>
 
       </div>
 
         <div>
           {wishlistTotal === 0 ? null : <span className=' relative -top-0 items-center z-10 -right-4 bg-red-500 w-4 h-4 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlistTotal}</span>}
-          <AiOutlineHeart className={wishlistTotal === 0 ? active_class : regular_class} color="white" size={22} />
+          <NavLink to="/wishlist"><AiOutlineHeart className={wishlistTotal === 0 ? active_class : regular_class} color="white" size={22} /></NavLink>
         </div>
         {user.user.createStatus == "Success" ? <Link to="/profile"><AiOutlineUser color='white' size={21} /></Link> : <Link to="/login"><AiOutlineUser color='white' size={21} /></Link>}
       </div>

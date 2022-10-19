@@ -20,10 +20,11 @@ import Kosnicka from './ProfileComponents/Kosnicka'
 import { FiSettings } from 'react-icons/fi'
 import AdminSettings from './ProfileComponents/AdminSettings'
 import { GiPayMoney } from 'react-icons/gi'
-import Rasprodazba from './ProfileComponents/Rasprodazba'
+
 import { useSelector } from 'react-redux'
 import { BiDownArrow } from 'react-icons/bi'
 import CartContainer from './Cart/CartContainer'
+import Sliki from './ProfileComponents/Sliki'
 
 
 
@@ -94,7 +95,7 @@ const Profile = () => {
         },
         {
             id: 11,
-            name: "Распродажба",
+            name: "Слики",
             class: "bg-zinc-900"
         },
     ]
@@ -111,7 +112,7 @@ const Profile = () => {
         else if (option == "Магацин") return <Magacin />
         // else if (option == "Статистика") return <Statistika />
         else if (option == "Опции") return <AdminSettings />
-        else if (option == "Распродажба") return <Rasprodazba />
+        else if (option == "Слики") return <Sliki />
 
     }
     const orders = useSelector(state => state.orders.order.data)
@@ -244,7 +245,7 @@ const Profile = () => {
                                     <div className='flex flex-col items-center w-2/4 gap-2 p-2 rounded-md '>
                                         <GiPayMoney color='white' size={25} />
                                     </div>
-                                    <h1 className='font-poppins text-[0.8rem] text-white '>Распродажба</h1>
+                                    <h1 className='font-poppins text-[0.8rem] text-white '>Слики</h1>
                                 </div>
                                 {/* <div onClick={e => setColor(12)} className='flex flex-col gap-2 w-screen items-center'>
                         <span className='relative top-6 -right-7  w-7 h-7 flex justify-center text-white font-poppins align-middle rounded-full'></span>
