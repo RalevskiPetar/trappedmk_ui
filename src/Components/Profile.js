@@ -24,7 +24,7 @@ import { GiPayMoney } from 'react-icons/gi'
 import { useSelector } from 'react-redux'
 import { BiDownArrow } from 'react-icons/bi'
 import CartContainer from './Cart/CartContainer'
-import Sliki from './ProfileComponents/Sliki'
+import Sliki from './ProfileComponents/Sliki/Sliki'
 
 
 

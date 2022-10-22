@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import Footer from "../../Footer"
 import { fetchClothes } from "../../Redux/Clothes/Actions"
 import { CartActions } from "../../Redux/Orders/Actions"
 import { fetch_Store } from "../../Redux/Store/Actions"
@@ -34,7 +33,6 @@ const CartContainer = ({ }) => {
     
     return (
         <div>
-            <Header />
             <div className="w-full h-full top-0 overflow-y-auto overflow-x-hidden sticky-0" id="chec-div">
                 <div className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="checkout">
                     <div className="flex items-end lg:flex-row flex-col justify-end" id="cart">
@@ -64,7 +62,6 @@ const CartContainer = ({ }) => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     )
 }

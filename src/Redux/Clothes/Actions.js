@@ -5,7 +5,15 @@ import {
     createCategory as createCategoryCall,
     updateClothes as updateClothesCall,
     updateCategories as updateCategoriesCall,
+    ImagesAPI,
 } from "./Api"
+
+
+const check_token_expired = (e, default_action, dispatch) => {
+    console.log(e)
+    if (e?.msg === "Token has expired") dispatch({ type: "LOGOUT" })
+    else dispatch(default_action)
+}
 
 
 
@@ -61,4 +69,40 @@ export const updateCategories = (categoryID) => (dispatch, getState) => {
         .then(res => dispatch({ type: "UPDATE_CATEGORY_SUCCESS", payload: res }))
         .catch(e => dispatch({ type: "UPDATE_CATEGORY_FAILURE", payload: e }))
 
+}
+
+
+export const ImagesActions = {
+    "create" : images => (dispatch, getState) => {
+        dispatch({type: "CREATE_IMAGES_REQUEST"})
+        ImagesAPI.create(images, getState()?.user?.user?.data?.token)
+            .then(res => dispatch({ type: "CREATE_IMAGES_SUCCESS", payload: res }))
+            .catch(e => check_token_expired(
+                e, { type: "CREATE_IMAGES_FAILURE", payload: e }, dispatch
+            ))
+    },
+    "raed" : () => (dispatch, getState) => {
+        dispatch({type: "LOAD_IMAGES_REQUEST"})
+        ImagesAPI.read(getState()?.user?.user?.data?.token)
+            .then(res => dispatch({ type: "LOAD_IMAGES_SUCCESS", payload: res }))
+            .catch(e => check_token_expired(
+                e, { type: "LOAD_IMAGES_FAILURE", payload: e }, dispatch
+            ))
+    },
+    "update" : image => (dispatch, getState) => {
+        dispatch({type: "UPDATE_IMAGES_REQUEST"})
+        ImagesAPI.update(image, getState()?.user?.user?.data?.token)
+            .then(res => dispatch({ type: "UPDATE_IMAGES_SUCCESS", payload: res }))
+            .catch(e => check_token_expired(
+                e, { type: "UPDATE_IMAGES_FAILURE", payload: e }, dispatch
+            ))
+    },
+    "delete" : id => (dispatch, getState) => {
+        dispatch({type: "DELETE_IMAGES_REQUEST"})
+        ImagesAPI.delete(id, getState()?.user?.user?.data?.token)
+            .then(res => dispatch({ type: "DELETE_IMAGES_SUCCESS", payload: res }))
+            .catch(e => check_token_expired(
+                e, { type: "DELETE_IMAGES_FAILURE", payload: e }, dispatch
+            ))
+    }
 }
