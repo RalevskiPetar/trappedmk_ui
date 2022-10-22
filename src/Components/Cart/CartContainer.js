@@ -34,7 +34,6 @@ const CartContainer = ({ }) => {
     
     return (
         <div>
-            <Header />
             <div className="w-full h-full top-0 overflow-y-auto overflow-x-hidden sticky-0" id="chec-div">
                 <div className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="checkout">
                     <div className="flex items-end lg:flex-row flex-col justify-end" id="cart">

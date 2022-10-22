@@ -17,8 +17,8 @@ const Header = () => {
   const regular_class = "relative -top-2"
   const active_class = "relative -top-0"
 
-  const wishlistTotal = wishlistItems.filter(w => w.user_id === user.user.data?.user.id).length
-  const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user.id).length
+  const wishlistTotal = wishlistItems.filter(w => w.user_id === user.user.data?.user?.id).length
+  const cartTotal = cartReducer.filter(c => c.user_id === user.user.data?.user?.id).length
 
 
 
@@ -50,7 +50,7 @@ const Header = () => {
           {wishlistTotal === 0 ? null : <span className=' relative -top-0 items-center z-10 -right-4 bg-red-500 w-4 h-4 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlistTotal}</span>}
           <NavLink to="/wishlist"><AiOutlineHeart className={wishlistTotal === 0 ? active_class : regular_class} color="white" size={22} /></NavLink>
         </div>
-        {user.user.createStatus == "Success" ? <Link to="/profile"><AiOutlineUser color='white' size={21} /></Link> : <Link to="/login"><AiOutlineUser color='white' size={21} /></Link>}
+        {user.user.createStatus == "Success" || user.user.loadStatus == "Success" ? <Link to="/profile"><AiOutlineUser color='white' size={21} /></Link> : <Link to="/login"><AiOutlineUser color='white' size={21} /></Link>}
       </div>
 
     </div>
