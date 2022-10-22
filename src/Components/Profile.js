@@ -177,7 +177,7 @@ const Profile = () => {
                         </div>
                         <div className='flex flex-row justify-around  p-2 items-center lg:w-1/3'>
                             <div onClick={e => setColor(4)} className='flex flex-col lg:w-1/4 gap-2 w-screen items-center'>
-                                <span className=' relative top-6 items-center z-10 -right-7 bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlist_total.filter(w => w.user_id === user_info.id).length}</span>
+                                <span className=' relative top-6 items-center z-10 -right-7 bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{wishlist_total.filter(w => w.user_id === user_info?.id).length}</span>
                                 <div className='lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg flex flex-col items-center w-2/4 gap-2   p-4 rounded-lg lg:shadow-xl'>
 
                                     <AiOutlineHeart color='white' size={30} />
