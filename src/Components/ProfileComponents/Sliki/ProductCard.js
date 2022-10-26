@@ -1,4 +1,5 @@
-import { STATIC_URL } from "../../../Redux/constants"
+import { API_URL , STATIC_URL } from "../../../Redux/constants"
+
 
 
 export const ProductCard = ({

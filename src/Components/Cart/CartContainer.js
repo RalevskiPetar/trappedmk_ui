@@ -8,6 +8,7 @@ import DoubleBubble from "../BarLoader"
 import Header from "../Header"
 import CartProduct from "./CartProduct"
 import Checkout from "./Checkout"
+import Footer from "../../Footer"
 
 const CartContainer = ({ }) => {
     const dispatch = useDispatch()
@@ -61,7 +62,9 @@ const CartContainer = ({ }) => {
                         />
                     </div>
                 </div>
+                
             </div>
+           
         </div>
     )
 }

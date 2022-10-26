@@ -18,7 +18,7 @@ export const login = async user => {
 }
 
 export const fetchAllusers = async (token) => {
-    
+    console.log(token)
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token);
     const requestOptions = {

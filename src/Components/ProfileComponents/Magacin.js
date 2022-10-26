@@ -3,7 +3,7 @@ import { BsCircle, BsCircleFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { create_Store } from '../../Redux/Store/Actions'
 import { createClothes } from '../../Redux/Clothes/Actions'
-import { AiOutlineCiCircle } from 'react-icons/ai'
+import { AiOutlineAppstoreAdd, AiOutlineCiCircle, AiOutlineFilter, AiTwotoneFilter } from 'react-icons/ai'
 import { BiRadioCircle, BiRadioCircleMarked } from 'react-icons/bi'
 import DoubleBubble from '../BarLoader'
 
@@ -27,7 +27,6 @@ const Magacin = () => {
     }
   ]
   const [expanded, setExpanded] = useState(false)
-  const [createProduct, setCreateProduct] = useState(false)
   const [clicked, setClicked] = useState(1)
   const [filterProducts, setFilterProducts] = useState(1)
   const product_data = useSelector(state => state.clothes.clothes.data)
@@ -95,23 +94,32 @@ const Magacin = () => {
   }
   return (
     <div>
-      <h1 onClick={e => setCreateProduct(!createProduct)} className='font-poppins text-center font-bold p-2 cursor-pointer'>• CREATE PRODUCT AND PRODUCT QUANTITY •</h1>
-      {createProduct == true ?
-        <div className='flex flex-row w-screen'>
-          <form onSubmit={e => handleCreateQuantity(e)} className='flex flex-col items-center gap-2 p-2 w-1/2'>
-            <ul>
-              {product_data?.map(pd => pd === null ? null : <li onClick={e => setClicked(pd.id)} className='flex flex-row gap-2 items-center lg:justify-center'>
-                {clicked === pd.id ? <BiRadioCircleMarked size={20} color='gray' /> : <BiRadioCircle size={20} color='gray' />}
-                <h1 className='font-poppins text-slate-500'>{pd.name}</h1>
-              </li>)}
+      <div className='flex flex-row gap-1 justify-center items-center'>
+      <AiOutlineAppstoreAdd size={20}/>
+      <h1 onClick={e => setExpanded(1)} className='font-poppins text-center font-bold p-2 cursor-pointer'> CREATE PRODUCT QUANTITY</h1>
+      </div>
+      {expanded== 1 ? 
+      <form onSubmit={e => handleCreateQuantity(e)} className='flex flex-col items-center gap-2 p-2 w-screen justify-center' >
+      <ul>
+        {product_data?.map(pd => pd === null ? null : <li onClick={e => setClicked(pd.id)} className='flex flex-row gap-2 items-center lg:justify-center'>
+          {clicked === pd.id ? <BiRadioCircleMarked size={20} color='gray' /> : <BiRadioCircle size={20} color='gray' />}
+          <h1 className='font-poppins text-slate-500'>{pd.name}</h1>
+        </li>)}
 
-            </ul>
-            <input onChange={e => handleChange(e)} name="size" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="SIZE" />
-            <p className='font-poppins text-slate-300'>( 1 = small , 2 = large  , 3 = extra-large)</p>
-            <input onChange={e => handleChange(e)} name="quantity" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="QUANTITY" />
-            <button onClick={e => handleCreateQuantity(e)} className='font-poppins bg-black text-white  pl-4 pr-4 p-2 rounded-sm transition-all hover:scale-105'>CREATE PRODUCT QUANTITY</button>
-          </form>
-          <form onClick={e => handleChangeProduct(e)} className='flex flex-col items-center gap-2 p-2 w-1/2'>
+      </ul>
+      <input onChange={e => handleChange(e)} name="size" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="SIZE" />
+      <p className='font-poppins text-slate-300'>( 1 = small , 2 = large  , 3 = extra-large)</p>
+      <input onChange={e => handleChange(e)} name="quantity" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="QUANTITY" />
+      <button onClick={e => handleCreateQuantity(e)} className='font-poppins bg-black text-white  pl-4 pr-4 p-2 rounded-sm transition-all hover:scale-105'>CREATE PRODUCT QUANTITY</button>
+    </form> : null }  
+      <div className='flex flex-row gap-1 justify-center items-center'>
+      <AiOutlineAppstoreAdd size={20}/>
+      <h1 onClick={e => setExpanded(2)} className='font-poppins text-center font-bold p-2 cursor-pointer'> CREATE PRODUCT</h1>
+      </div>
+      
+      {expanded == 2 ?
+          
+          <form onClick={e => handleChangeProduct(e)} className='flex flex-col justify-center items-center gap-2 p-2 w-screen'>
             <input onChange={e => handleChangeProduct(e)} name="name" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="NAME" />
             <input onChange={e => handleChangeProduct(e)} name="description" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="DESCRIPTION" />
             <input onChange={e => handleChangeProduct(e)} name="price" className='font-poppins border-[0.1rem] outline-none border-slate-100 p-2 text-center w-1/4' type="text" placeholder="PRICE" />
@@ -140,10 +148,13 @@ const Magacin = () => {
 
             <button type='button' onClick={e => handleCreateProduct(e)} className='font-poppins bg-black text-white  pl-4 pr-4 p-2 rounded-sm transition-all hover:scale-105'>CREATE PRODUCT</button>
           </form>
-        </div>
+      
         : null}
-      <h1 onClick={e => setExpanded(!expanded)} className='font-poppins border-t-[0.1rem] border-b-[0.1rem] cursor-pointer text-center font-bold p-2'>• FILTER •</h1>
-      {expanded == true ?
+      <div className='flex flex-row gap-1 items-center justify-center'>
+      {expanded === 3 ? <AiOutlineFilter size={20} /> : <AiTwotoneFilter size={20}/> }
+      <h1 onClick={e => setExpanded(3)} className='font-poppins cursor-pointer text-center font-bold p-2'> FILTER </h1>
+      </div>  
+      {expanded == 3 ?
         <div >
           <ul className='font-poppins p-4 animate-fade-in-down '>
             {product_data?.map(pd => <li onClick={e => setFilterProducts(pd.id)} className='flex flex-row gap-2 items-center lg:justify-center'>

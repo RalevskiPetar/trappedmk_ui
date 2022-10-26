@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { AiOutlineBorderOuter } from "react-icons/ai"
 import { BsCircle, BsCircleFill } from "react-icons/bs"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { update_Order } from "../../Redux/Orders/Actions"
+
 
 const PorackaCard = ({
     order,
     clothes,
-    allusers,
     store,
     user,
     order_statuses
@@ -16,6 +16,7 @@ const PorackaCard = ({
     const [clicked, setClicked] = useState(1)
     const [updatedOrder, setUpdatedOrder] = useState("")
     const [zabeleska, setZabeleska] = useState("")
+    const allusers = useSelector(state => state.user.user.data.users)
 
     const handleUpdate = (e, o) => {
         e.preventDefault()
@@ -31,7 +32,7 @@ const PorackaCard = ({
     const store_product = store.find(s => s.id === order.product_id)
     const clothing = clothes.find(c => c.id === store_product.product_id)
     const user_info = allusers?.find(u => u.id === order.user_id)
-    console.log(user_info)
+    console.log(allusers)
     
     return (
         <form onSubmit={e => handleUpdate(e, order)} className=' p-6 flex flex-col border-b-[0.1rem] border-b-slate-200 lg:border-r-[0.1rem] lg:border-r-slate-200 justify-center  items-center'>
