@@ -13,10 +13,12 @@ import { BsEmojiSmile } from 'react-icons/bs'
 import { Link, NavLink } from 'react-router-dom'
 import DoubleBubble from './BarLoader'
 import { FiShoppingCart } from 'react-icons/fi'
+import {useWindowSize} from '../useWindowSize.ts'
 const sizes = ["", "S", "M", "L", "XL"]
 const PorackaProizvod = () => {
   const dispatch = useDispatch()
   const { name } = useParams()
+  const size = useWindowSize()
   const product_data = useSelector(state => state.clothes.clothes.data)
   const store_available = useSelector(state => state.store.store.data.stores)
   const order_stat = useSelector(state => state.orders.order.createStatus)
@@ -67,6 +69,8 @@ const PorackaProizvod = () => {
   const currentStore = store_available.find(s => s.size === selectedSize && s.product_id === current_prod.id)
   const itemInCart = cartReducer.data.find(item => item.user_id === user.user.data.user.id && item.store_id === currentStore.id)
 
+  console.log(size[0])
+
   const toggleCart = e => {
     e.preventDefault()
     if (itemInCart === undefined) {
@@ -83,24 +87,36 @@ const PorackaProizvod = () => {
       <Header />
 
       <form className=' p-6 overflow-x-hidden flex flex-row gap-1  justify-center items-center  pt-20  '  >
-        <div className='flex flex-col items-center w-1/2'>
-          <div className='lg:flex lg:flex-row lg:items-center'>
-            <RiArrowLeftSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200' />
-            <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[38rem]' />
-            <RiArrowRightSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200 ' />
-          </div>
-          <div className='lg:flex lg:flex-row '>
-            <img src='http://localhost:3000/img/bluza.png' className='lg:border-slate-100 lg:border-[0.1rem] lg:w-[5rem] lg:opacity-40' />
-            <img src='http://localhost:3000/img/bluza.png' className='lg:border-slate-100 lg:border-[0.1rem] lg:w-[5rem] ' />
-            <img src='http://localhost:3000/img/bluza.png' className='lg:border-slate-100 lg:border-[0.1rem] lg:w-[5rem] lg:opacity-40' />
-          </div>
+        {size[0].width < 900 ? <div className=''>
+          <div className='flex flex-row items-center'>
+          <RiArrowLeftSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200' />
+          <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[38rem]' />
+          <RiArrowRightSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200 ' />
         </div>
+        <div className='flex flex-row justify-center '>
+          <img src='http://localhost:3000/img/bluza.png' className='border-slate-100 border-[0.1rem] w-[3rem] opacity-40 ' />
+          <img src='http://localhost:3000/img/bluza.png' className='border-slate-100 border-[0.1rem] w-[3rem]  ' />
+          <img src='http://localhost:3000/img/bluza.png' className='border-slate-100 border-[0.1rem] w-[3rem] opacity-40 ' />
+        </div>
+        </div> : 
+        <div className='flex flex-col items-center w-1/2'>
+        <div className='lg:flex lg:flex-row lg:items-center'>
+          <RiArrowLeftSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200' />
+          <img src='http://localhost:3000/img/bluza.png' className='w-[14rem] lg:w-[38rem]' />
+          <RiArrowRightSLine size={50} color="gray" className='lg:border-[0.1rem] lg:rounded-full lg:bg-slate-200 ' />
+        </div>
+        <div className='lg:flex lg:flex-row '>
+          <img src='http://localhost:3000/img/bluza.png' className='lg:border-slate-100 lg:border-[0.1rem] lg:w-[5rem] lg:opacity-40 w-1/2' />
+          <img src='http://localhost:3000/img/bluza.png' className='lg:border-slate-100 lg:border-[0.1rem] lg:w-[5rem] w-1/2 ' />
+          <img src='http://localhost:3000/img/bluza.png' className='lg:border-slate-100 lg:border-[0.1rem] lg:w-[5rem] lg:opacity-40 w-1/2' />
+        </div>
+      </div>}
 
-        <div className='lg:flex lg:flex-col lg:w-1/2 lg:items-center lg:gap-6'>
+        {size[0].width < 900 ? null : <div className='lg:flex lg:flex-col lg:w-1/2 lg:items-center lg:gap-6'>
           <div className='flex flex-col items-center justify-center'>
-            <div className='border-[0.1rem] border-red-200 p-4  '>
+            {/* <div className='border-[0.1rem] border-red-200 p-4  '>
               <h1 className='font-poppins  font-bold '>Make 3 orders get 20% off</h1>
-            </div>
+            </div> */}
             <h1 className='font-poppins text-3xl p-4 '>{name}</h1>
             <h1 className='font-poppins text-2xl'></h1>
             <h1 className='font-poppins text-xl  '>{product_data.find(p => p.name == name).price} den</h1>
@@ -157,7 +173,7 @@ const PorackaProizvod = () => {
               }
             </div>}
         </div>
-
+}
       </form>
       <p className='font-poppins text-center'>• 100% cotton • Macedonian Product • TrappedMK • Clothing • Brand • T-Shirt • Gang •</p>
       <p className='font-poppins text-center'>• 100% cotton • Macedonian Product • TrappedMK • Clothing • Gang •</p>

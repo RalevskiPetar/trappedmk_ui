@@ -57,7 +57,7 @@ const ProfileInfo = () => {
                 </div>
             </div>
 
-            <div className='flex flex-row gap-2 w-screen'>
+            <div className='flex flex-row gap-2 w-screen justify-center'>
                 <form onSubmit={e => handleUpdate(e)} className='flex flex-col justify-center align-middle items-center h-full gap-4 pb-[3rem] pt-[5rem] w-1/2'>
                     <div className='flex flex-col justify-center w-screen items-center'>
                         <h1 className='font-poppins text-slate-400 text-center'>name</h1>
@@ -81,7 +81,7 @@ const ProfileInfo = () => {
                     </div>
                     <div className='flex flex-col justify-center w-screen items-center'>
                         <h1 className='font-poppins text-slate-400 text-center'>password</h1>
-                        <input onChange={e => handleChange(e)} value={userInfo["password"]} name="password" type='text' className='outline-none text-black border-b-2 border-b-slate-300 w-5/6 lg:w-1/4 text-lg lg:text-center' placeholder="password" />
+                        <input onChange={e => handleChange(e)} value={userInfo["password"]} name="password" type='password' className='outline-none text-black border-b-2 border-b-slate-300 w-5/6 lg:w-1/4 text-lg lg:text-center' placeholder="password" />
                     </div>
                     {user.user.updateStatus == "Success" ? <p class="font-poppins text-red-500 font-bold ">USER UPDATED</p> : user.user.updateStatus == "Pending" ?
 
@@ -90,7 +90,7 @@ const ProfileInfo = () => {
                     {user.user.updateStatus = ""}
                     <button onClick={e => handleUpdate(e)} className='border-[0.1rem] border-zinc-800 p-2 font-poppins pl-4 pr-4 rounded-md  '>save</button>
                 </form>
-                <div className='flex flex-col items-center justify-center w-1/2'>
+                {/* <div className='flex flex-col items-center justify-center w-1/2'>
                     <div className='flex flex-row items-center gap-4  p-[2rem] border-[0.1rem] pl-[8rem] pr-[8rem]'>
                         <h1 className='font-poppins text-xl'>Orders</h1>
                         <h1 className='font-poppins text-xl bg-slate-200 p-2 rounded-full'>34</h1>
@@ -109,10 +109,10 @@ const ProfileInfo = () => {
                             <AiOutlineLock className='border-slate-300 border-[0.1rem] p-2 rounded-md  ' size={50} />
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
-            <div className='w-screen flex flex-row justify-center'>
-                <button className='font-poppins bg-black w-1/12 text-white pt-2 pb-2 rounded-md transition-all hover:scale-110'>LOGOUT</button>
+            <div className='w-screen flex flex-row justify-center lg:mb-1 mb-10'>
+                <button className='font-poppins bg-black lg:w-1/12 w-1/5 md:w-1/5 text-white pt-2 pb-2 rounded-md transition-all hover:scale-110'>LOGOUT</button>
             </div>
             <Footer />
 

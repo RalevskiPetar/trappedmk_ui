@@ -30,7 +30,7 @@ const LoginFrom = () => {
     }
 
     return (
-        <form onSubmit={e => handleLogin(e)} className=' justify-center h-full w-screen flex flex-col gap-4  items-center lg:z-10 lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:w-1/3 lg:drop-shadow-lg lg:h-2/3 lg:rounded-md'>
+        <form onSubmit={e => handleLogin(e)} className=' justify-center h-full w-screen flex flex-col gap-4  items-center lg:z-10 lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:w-1/3 lg:drop-shadow-lg lg:h-3/4 lg:rounded-md'>
            
             <div className='lg:flex lg:flex-col lg:items-center lg:p-4  hidden lg:mb-12'>
                 <img src='http://localhost:3000/img/logo.png ' className=' lg:w-[14rem]' />
@@ -44,7 +44,7 @@ const LoginFrom = () => {
                 <BiLockAlt className='border-b-2 border-b-zinc-300 w-2/14 mb-[0.25rem] p-1 lg:text-white text-zinc-600'  size={30} />
                 <input onChange={e => handleChange(e)} value={slogin["password"]} name="password" className='border-b-2 border-b-zinc-300 lg:bg-transparent lg:text-white lg:w-1/6 w-3/5 font-poppins outline-none lg:placeholder:text-white' type="password" placeholder="Password" />
             </div>
-            <h1 className='ml-[7rem] lg:text-black font-bold font-poppins lg:pb-2 lg:ml-[12rem] text-sm'>Forgot your password?</h1>
+            {/* <h1 className='ml-[7rem] lg:text-black font-bold font-poppins lg:pb-2 lg:ml-[12rem] text-sm'>Forgot your password?</h1> */}
             <div className='flex w-screen justify-center items-center lg:w-1/3 lg:gap-6 flex-col lg:flex lg:flex-row '>
             
             <button onClick={e => handleLogin(e)} className=' w-2/3 font-poppins text-black lg:text-white border-[0.1rem] border-zinc-800 p-2 rounded-sm lg:hover:bg-black lg:hover:text-white lg:hover:border-[0.1rem] lg:hover:border-black lg:border-white lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:scale-110 lg:pl-7 lg:pr-7 '>LOGIN</button>

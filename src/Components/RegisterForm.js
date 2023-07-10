@@ -33,7 +33,7 @@ const RegisterForm = () => {
     }
    
   return (
-    <form onSubmit={e => handleRegister(e)}  className=' justify-center h-full w-screen flex flex-col gap-4  items-center mb-6 lg:z-10 lg:bg-opacity-40 lg:bg-white lg:placeholder:text-white lg:bg-backdrop-blur-md lg:w-1/3 lg:drop-shadow-lg lg:h-3/4 lg:rounded-md'>
+    <form onSubmit={e => handleRegister(e)}  className=' justify-center h-full w-screen flex flex-col gap-4  items-center mb-6 lg:z-10 lg:bg-opacity-40 lg:bg-white lg:placeholder:text-white lg:bg-backdrop-blur-md lg:w-1/3 lg:drop-shadow-lg lg:h-[95vh] lg:rounded-md'>
     <div className='lg:flex lg:flex-col lg:items-center lg:p-4  hidden lg:mb-12'>
                 <img src='http://localhost:3000/img/logo.png ' className=' lg:w-[14rem]' />
                 <h1 className='font-poppins text-[0.7rem] text-black font-bold lg:text-[1rem] hidden'>since 2018</h1>
@@ -71,8 +71,8 @@ const RegisterForm = () => {
         <button onClick={e => handleRegister(e)} className='text-white w-2/3 lg:w-1/2 font-poppins bg-black lg:bg-transparent lg:border-[0.1rem] lg:hover:border-black p-2 rounded-sm lg:hover:bg-black  lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:scale-110 lg:mt-10 '>REGISTER</button>
        
         {user.user.createStatus == "Success" ? <p className="font-poppins text-green-500 font-bold">User Created</p> : user.user?.createStatus == "Fail" ? <p className="font-poppins text-red-500 font-bold">Something went wrong please refresh the page!</p> : null  }
-     <div className='font-poppins font-bold justify-start p-2'>
-     <Link to="/login"><h1>back to login</h1></Link>
+     <div className='font-poppins font-bold justify-start p-2 lg:mb-1 mb-10'>
+     <Link to="/login" ><h1>back to login</h1></Link>
      </div>
     </form>
   )
