@@ -32,8 +32,8 @@ const PorackaProizvod = () => {
 
   useEffect(() => dispatch(CartActions.read()), [])
 
-  const selected_class = "font-poppins border-[0.1rem] border-slate-200 p-6 w-20 text-center bg-slate-800 text-white"
-  const regular_class = "font-poppins  border-[0.1rem] border-slate-200 p-6 w-20 text-center transition-all "
+  const selected_class = "font-poppins border-[0.1rem] border-slate-200  m-auto p-2 lg:p-6 w-10  lg:w-20 text-center bg-slate-800 text-white"
+  const regular_class = "font-poppins  border-[0.1rem] border-slate-200 m-auto p-2 lg:p-6 w-10  lg:w-20 text-center transition-all "
 
 
   const current_prod = product_data.find(pd => pd.name == name)
@@ -98,6 +98,66 @@ const PorackaProizvod = () => {
           <img src='http://localhost:3000/img/bluza.png' className='border-slate-100 border-[0.1rem] w-[3rem]  ' />
           <img src='http://localhost:3000/img/bluza.png' className='border-slate-100 border-[0.1rem] w-[3rem] opacity-40 ' />
         </div>
+        <div className='flex flex-col items-center justify-center'>
+            {/* <div className='border-[0.1rem] border-red-200 p-4  '>
+              <h1 className='font-poppins  font-bold '>Make 3 orders get 20% off</h1>
+            </div> */}
+            <h1 className='font-poppins text-3xl p-4 '>{name}</h1>
+            <h1 className='font-poppins text-2xl'></h1>
+            <h1 className='font-poppins text-xl  '>{product_data.find(p => p.name == name).price} den</h1>
+            <h1 className='font-poppins text-xl '>available sizes</h1>
+            <div className='flex flex-row'>
+              {filteredSizes.length === 0 ? <h1 className='font-poppins text-red-600 font-bold text-3xl animate-cursor'>SOLD OUT</h1> :
+                filteredSizes}
+
+            </div>
+            <h1 className='font-poppins lg:p-2 lg:text-lg lg:font-bold mt-5 '>quantity</h1>
+            {filteredSizes.length === 0 ?
+              <div className='lg:flex lg:flex-row lg:items-center lg:gap-2 '>
+                {quantity < 1 ?
+                  <span className='w-4'></span>
+                  :
+                  <AiOutlineMinus className='cursor-not-allowed' />}
+                <h1 className='lg:border-[0.1rem] lg:border-slate-200 lg:p-4 lg:rounded-sm '>0</h1>
+                <AiOutlinePlus className='cursor-not-allowed' />
+              </div> :
+              <div className='flex flex-row items-center gap-2'>
+                {quantity < 1 ?
+                  <span className='w-4'></span>
+                  :
+                  <AiOutlineMinus onClick={e => setQuantity(quantity - 1)} />}
+                <h1 className='lg:border-[0.1rem] lg:border-slate-200 lg:p-4 lg:rounded-sm'>{quantity}</h1>
+                <AiOutlinePlus onClick={e => setQuantity(quantity + 1)} />
+              </div>}
+          </div>
+          <h1 className='font-poppins  font-bold text-center '>total price: <span className='font-poppins text-red-400 font-bold'> {quantity * product_data.find(p => p.name == name).price}</span> den.</h1>
+          {filteredSizes.length === 0 ?
+            <div className='flex flex-row justify-center items-center gap-10  w-1/2'>
+              <AiOutlineHeart className='cursor-not-allowed  text-slate-400' size={35} />
+
+              <button className=' cursor-not-allowed  lg:text-center lg:border-[0.1rem] lg:border-slate-400 lg:w-1/3 p-2 lg:rounded-sm font-poppins bg-black text-white'>Buy NOW</button>
+              <BiCart className='text-slate-400 cursor-not-allowed  ' size={30} />
+            </div> :
+            <div className='flex flex-row justify-center items-center gap-10  mt-5'>
+              {wishlistItems.find(it => it.store_id == productId && it.user_id === user.user.data.user.id) ?
+                <AiFillHeart onClick={e => dispatch(WishlistActions.delete(wishlistItems.find(it => it.store_id == productId && it.user_id === user.user.data.user.id).id))} className=' lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} /> :
+                <AiOutlineHeart onClick={e => handleCreateWishListItem(e)} className=' lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={35} />}
+
+              {order_stat === "Wait.." ?
+                <DoubleBubble /> : null}
+              {order_stat === "Success" && submitted === true ?
+                <div className='flex flex-row gap-1 items-center'>
+                  <h1 className='font-poppins  text-sm'>Thank you for purchase</h1>
+                  <BsEmojiSmile />
+                </div> :
+                user.user.logout === false ? <button onClick={e => handleCreateOrder(e)} className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center lg:border-[0.1rem] lg:border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'>Buy NOW</button> :
+                  <NavLink to='/login' className='lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1 lg:hover:bg-black lg:hover:text-white lg:hover:scale-110 lg:text-center pl-4 pr-4 border-[0.1rem] border-zinc-900 lg:w-1/3 p-2 lg:rounded-sm font-poppins'><button >Buy NOW</button></NavLink>}
+              {itemInCart === undefined ?
+                <FiShoppingCart onClick={e => toggleCart(e)} className='cursor-pointer lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={30} /> :
+                <FaShoppingCart onClick={e => toggleCart(e)} className='cursor-pointer lg:transition lg:ease-in-out lg:delay-150  lg:hover:-translate-y-1  lg:hover:text-black lg:hover:scale-110' size={30} />
+              }
+            </div>}
+          
         </div> : 
         <div className='flex flex-col items-center w-1/2'>
         <div className='lg:flex lg:flex-row lg:items-center'>
