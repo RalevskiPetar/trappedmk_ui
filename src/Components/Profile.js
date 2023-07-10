@@ -116,7 +116,7 @@ const Profile = () => {
 
     }
     const orders = useSelector(state => state.orders.order.data)
-
+    console.log(orders)
     return (
 
         <div >
@@ -140,10 +140,10 @@ const Profile = () => {
                     <div className='lg:flex lg:flex-row flex lg:justify-center flex-col lg:mb-10'>
                         <div className='flex flex-row  justify-between p-2 lg:w-1/3 items-center '>
                             <div onClick={e => setColor(1)} className='flex flex-col gap-2 w-screen lg:w-1/4 items-center'>
-                                {orders.filter(o => o?.order_id_stat == 7).length == 0 ?
+                                {orders?.filter(o => o?.order_id_stat == 7)?.length == 0 ?
                                     <span className='relative top-6 z-10 -right-7 items-center  w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'></span>
                                     :
-                                    <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders.filter(o => o?.order_id_stat == 7).length}</span>}
+                                    <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders?.filter(o => o?.order_id_stat == 7).length}</span>}
                                 <div className='flex flex-col items-center w-2/4   gap-2  bg-yellow-500  p-4 rounded-lg  lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg lg:shadow-xl'>
 
                                     <RiTShirtLine color='white' size={30} />
@@ -151,10 +151,10 @@ const Profile = () => {
                                 <h1 className='font-poppins text-[1rem]  text-white'>Порачки</h1>
                             </div>
                             <div onClick={e => setColor(2)} className='flex flex-col gap-2 w-screen lg:w-1/4 items-center'>
-                                {orders.filter(o => o?.order_id_stat == 1).length == 0 ?
+                                {orders?.filter(o => o?.order_id_stat == 1).length == 0 ?
                                     <span className='relative top-6 z-10 -right-7 items-center  w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'></span>
                                     :
-                                    <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders.filter(o => o?.order_id_stat == 1).length}</span>}
+                                    <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders?.filter(o => o?.order_id_stat == 1).length}</span>}
                                 <div className='flex flex-col items-center w-2/4  gap-2   p-4 rounded-lg lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg lg:shadow-xl'>
 
                                     <BsTruck color='white' size={30} />
@@ -163,10 +163,10 @@ const Profile = () => {
                             </div>
                             <div onClick={e => setColor(3)} className='flex flex-col gap-2 lg:w-1/4 w-screen items-center'>
 
-                                {orders.filter(o => o?.order_id_stat == 6).length == 0 ?
+                                {orders?.filter(o => o?.order_id_stat == 6).length == 0 ?
                                     <span className='relative top-6 z-10 -right-7 items-center  w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'></span>
                                     :
-                                    <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders.filter(o => o?.order_id_stat == 6).length}</span>}
+                                    <span className='relative top-6 z-10 -right-7 items-center bg-red-500 w-7 h-7 flex justify-center text-white font-poppins align-middle text-[0.8rem] font-bold rounded-full'>{orders?.filter(o => o?.order_id_stat == 6).length}</span>}
                                 <div className='lg:bg-opacity-40 lg:bg-white lg:bg-backdrop-blur-md lg:drop-shadow-lg flex flex-col items-center w-2/4 gap-2   p-4 rounded-lg lg:shadow-xl'>
 
                                     <MdBlock color='white' size={30} />

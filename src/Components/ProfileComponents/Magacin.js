@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { BsCircle, BsCircleFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { create_Store } from '../../Redux/Store/Actions'
-import { createClothes } from '../../Redux/Clothes/Actions'
+import { createClothes, setClothesState } from '../../Redux/Clothes/Actions'
 import { AiOutlineAppstoreAdd, AiOutlineCiCircle, AiOutlineFilter, AiTwotoneFilter } from 'react-icons/ai'
 import { BiRadioCircle, BiRadioCircleMarked } from 'react-icons/bi'
 import DoubleBubble from '../BarLoader'
+import Modal from '../Modals/Modal'
 
 const Magacin = () => {
   const sizes = [
@@ -26,21 +27,30 @@ const Magacin = () => {
       name: "EXTRA-LARGE"
     }
   ]
+  const dispatch = useDispatch()
   const [expanded, setExpanded] = useState(false)
   const [clicked, setClicked] = useState(1)
   const [filterProducts, setFilterProducts] = useState(1)
   const product_data = useSelector(state => state.clothes.clothes.data)
+  const _product_data = useSelector(state => state.clothes.clothes)
+  const clothesState = useSelector(state => state.clothes)
   const sstore = useSelector(state => state.store.store.data.stores)
+  const _store = useSelector(state => state.store.store)
   const categories = useSelector(state => state.clothes.categories.data)
   const _orders = useSelector(state => state.orders.order.data)
   const reg_class = "border-[0.1rem] border-slate-200 p-1 pl-2 pr-2 font-poppins text-slate-400"
   const clicked_class = "border-[0.1rem] bg-slate-400 border-slate-200 p-1 pl-2 pr-2 font-poppins text-white"
   const [newProductQuantity, setNewProductQuantity] = useState("")
-  const dispatch = useDispatch()
+  const [submittedProduct, setSubmittedProduct] = useState(false)
+  const [submittedQuantity, setSubmittedQuantity] = useState(false)
+  const [newProduct, setNewProduct] = useState("")
+  const [category_clicked, setCategoryClicked] = useState(1)
+  const [gender, setGender] = useState(null)
   
 
   const handleCreateQuantity = e => {
     e.preventDefault()
+    setSubmittedQuantity(true)
     const form = new FormData()
     form.append("product_id", clicked)
     form.append("quantity", newProductQuantity["quantity"])
@@ -50,11 +60,11 @@ const Magacin = () => {
   }
   const handleChange = e => {
     setNewProductQuantity({ ...newProductQuantity, [e.target.name]: e.target.value })
+    setSubmittedQuantity(false)
   }
-  const [newProduct, setNewProduct] = useState("")
-  const [category_clicked, setCategoryClicked] = useState(1)
-  const [gender, setGender] = useState(null)
+
   const handleCreateProduct = e => {
+    setSubmittedProduct(true)
     e.preventDefault()
     const form = new FormData()
     form.append("name", newProduct["name"])
@@ -65,10 +75,11 @@ const Magacin = () => {
     dispatch(createClothes(form))
   }
   const handleChangeProduct = e => {
+    setSubmittedProduct(false)
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
   }
 
-  console.log(gender)
+  console.log(submittedProduct)
 
   const get_store_quantities = (store, orders) => {
    
@@ -139,8 +150,8 @@ const Magacin = () => {
                 {gender === 2 ? <BiRadioCircleMarked size={20} color='gray' /> : <BiRadioCircle size={20} color='gray' />}
                 <h1 className='font-poppins text-slate-500'>Woman</h1>
               </div>
-              <div onClick={e => setGender(null)} className='flex flex-row gap-1 items-center'>
-                {gender === null ? <BiRadioCircleMarked size={20} color='gray' /> : <BiRadioCircle size={20} color='gray' />}
+              <div onClick={e => setGender(3)} className='flex flex-row gap-1 items-center'>
+                {gender === 3 ? <BiRadioCircleMarked size={20} color='gray' /> : <BiRadioCircle size={20} color='gray' />}
                 <h1 className='font-poppins text-slate-500'>Unisex</h1>
               </div>
             </div>
@@ -150,9 +161,9 @@ const Magacin = () => {
           </form>
       
         : null}
-      <div className='flex flex-row gap-1 items-center justify-center'>
+      <div className='flex flex-row gap-1 items-center justify-center mb-10'>
       {expanded === 3 ? <AiOutlineFilter size={20} /> : <AiTwotoneFilter size={20}/> }
-      <h1 onClick={e => setExpanded(3)} className='font-poppins cursor-pointer text-center font-bold p-2'> FILTER </h1>
+      <h1 onClick={e => setExpanded(3)} className='font-poppins cursor-pointer text-center font-bold p-2 '> FILTER </h1>
       </div>  
       {expanded == 3 ?
         <div >
@@ -185,8 +196,8 @@ const Magacin = () => {
       </div>)
 
       }
-
-
+      {_product_data.createStatus === "Success" && submittedProduct === true ? <Modal message={"Успешно креиравте нов продукт."} /> : null}
+      {_store.createStatus === "Success" && submittedQuantity === true ? <Modal message={"Успешно додадовте количина за продуктот."}/> : null}
 
 
     </div>

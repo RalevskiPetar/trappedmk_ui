@@ -8,6 +8,7 @@ import {
     ImagesAPI,
 } from "./Api"
 
+export const setClothesState = newState => (dispatch, getState) => dispatch( {type : "SET_CLOTHES_STATE", payload: newState })
 
 const check_token_expired = (e, default_action, dispatch) => {
     console.log(e)

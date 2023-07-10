@@ -10,6 +10,8 @@ const InitialState = {
 
 export const Money_Tracker_Reducer = (state = InitialState , action) => {
     switch(action.type) {
+        case "SET_MONEY_STATE":
+            return { ...action.payload }
         case "FETCH_MONEY_TRACK_REQUEST":
             return {
              ...state,

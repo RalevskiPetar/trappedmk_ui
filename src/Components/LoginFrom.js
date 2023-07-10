@@ -20,6 +20,7 @@ const LoginFrom = () => {
         form.append("email", slogin["email"])
         form.append("password", slogin["password"])
         setSubmitted(true)
+        console.log(form)
         dispatch(login(form))
 
     }
@@ -41,7 +42,7 @@ const LoginFrom = () => {
             </div>
             <div className='flex flex-row justify-center  items-center w-screen '>
                 <BiLockAlt className='border-b-2 border-b-zinc-300 w-2/14 mb-[0.25rem] p-1 lg:text-white text-zinc-600'  size={30} />
-                <input onChange={e => handleChange(e)} value={slogin["password"] || ""} name="password" className='border-b-2 border-b-zinc-300 lg:bg-transparent lg:text-white lg:w-1/6 w-3/5 font-poppins outline-none lg:placeholder:text-white' type="password" placeholder="Password" />
+                <input onChange={e => handleChange(e)} value={slogin["password"]} name="password" className='border-b-2 border-b-zinc-300 lg:bg-transparent lg:text-white lg:w-1/6 w-3/5 font-poppins outline-none lg:placeholder:text-white' type="password" placeholder="Password" />
             </div>
             <h1 className='ml-[7rem] lg:text-black font-bold font-poppins lg:pb-2 lg:ml-[12rem] text-sm'>Forgot your password?</h1>
             <div className='flex w-screen justify-center items-center lg:w-1/3 lg:gap-6 flex-col lg:flex lg:flex-row '>

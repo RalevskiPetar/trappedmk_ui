@@ -29,6 +29,8 @@ const InitialState = {
 export const ClothesReducer = (state = InitialState, action) => {
 
     switch (action.type) {
+        case "SET_MONEY_STATE":
+            return { ...action.payload }
         case "FETCH_CLOTHES_REQUEST":
             return {
                 ...state,

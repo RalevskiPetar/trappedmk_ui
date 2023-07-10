@@ -5,6 +5,8 @@ import {
     update_Money as update_MoneyCall
  } from "./Api";
 
+export const setMoneyState = newState => (dispatch, getState) => dispatch( {type : "SET_MONEY_STATE", payload: newState })
+ 
 export const fetchMoneyTracker = () => async (dispatch , getState) => { 
     dispatch( {type: "FETCH_MONEY_TRACK_REQUEST"});
 
