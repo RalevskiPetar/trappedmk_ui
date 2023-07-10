@@ -1,4 +1,4 @@
-import { API_URL } from "../constants"
+import { API_URL } from "../constants.js"
 
 export const get_Money_Tracker = async (id = null) => {
     const append = id === null ? " " : "?id=" + id

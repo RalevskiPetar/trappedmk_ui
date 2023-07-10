@@ -71,10 +71,9 @@ const Zarabotka = () => {
   let odliv_suma = 0;
   let priliv_suma = 0;
   let clothes_priliv_suma = 0 ;
-  filteredOrders.map(fo => clothes_priliv_suma += products.find(p => p.id === store.find(s => s.id === fo.product_id).product_id).price)
+  filteredOrders.map(fo => clothes_priliv_suma += products.find(p => p.id === store.find(s => s.id === fo.product_id).product_id).price * fo.quantity)
   money_logs?.filter(m => m.type_id == 2 && m.date.slice(8, 11) === months.find(me => me.id === mesec).month).map(ml => odliv_suma += ml.ammount)
   money_logs?.filter(m => m.type_id == 1 && m.date.slice(8, 11) === months.find(me => me.id === mesec).month).map(ml => priliv_suma += ml.ammount)
-  console.log(clothes_priliv_suma)
   if (money_logs_messages.createStatus === "Pending") return <DoubleBubble speed={1} message="Loading.." />
 
   return (
@@ -82,9 +81,9 @@ const Zarabotka = () => {
       <h1 onClick={e => setCalendar(true)} className='font-poppins text-center p-2 bg-slate-100 shadow-md cursor-pointer'>IZBERI MESEC</h1>
       {calendar == true ? <Meseci setMesec={setMesec} setCalendar={setCalendar} /> : null}
       <div className='flex flex-row  '>
-        <div className='h-1/2 w-1/2 border-r-[0.0rem] border-slate-200'>
+        <div className='h-1/2 w-1/2 border-r-[0.0rem] border-slate-200 '>
           <h1 className='font-poppins text-center text-red-500 lg:text-2xl border-[0.1rem] border-2-slate-200 font-bold p-4'>ODLIV</h1>
-          <div className='flex flex-col justify-center '>
+          <div className='flex flex-col justify-center'>
             {money_logs?.filter(m => m.type_id === 2 && m.date.slice(8, 11) === months.find(me => me.id === mesec).month).map(m =>
               <div className='flex flex-row justify-between border-b-[0.03rem] border-r-[0.03rem] border-r-slate-200 border-b-slate-200 p-2'>
                 <h1 className='font-poppins text-red-400 font-bold'>{m.ammount} DEN.</h1>
@@ -97,7 +96,7 @@ const Zarabotka = () => {
           </div>
 
         </div>
-        <div className='h-1/2 w-1/2 border-r-[0.03rem] border-slate-200'>
+        <div className='h-1/2 w-1/2 border-r-[0.03rem] border-slate-200 '>
           <h1 className='font-poppins text-center text-green-400 font-bold lg:text-2xl p-4 border-[0.1rem] border-2-slate-200'>PRILIV</h1>
           <div className='flex flex-col justify-center '>
 
@@ -109,7 +108,7 @@ const Zarabotka = () => {
               </div>)}
             {filteredOrders.map(or => (
               <div className='flex flex-row justify-between border-b-[0.03rem] border-r-[0.03rem] border-r-slate-200 border-b-slate-200 p-2'>
-                <h1 className='font-poppins text-green-400 font-bold'>{products.find(p => p.id === store.find(s => s.id === or.product_id).product_id).price} DEN.</h1>
+                <h1 className='font-poppins text-green-400 font-bold'>{products.find(p => p.id === store.find(s => s.id === or.product_id).product_id).price * or.quantity} DEN.</h1>
                 <h1 className='font-poppins'>{or.date}</h1>
                <h1 className='font-poppins'>{products.find(p => p.id === store.find(s => s.id === or.product_id).product_id).name}</h1> 
               </div>)
