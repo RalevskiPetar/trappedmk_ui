@@ -103,9 +103,10 @@ export const ImagesAPI = {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + token);
         const requestOptions = {
-            "method": "DELETE", headers: myHeaders
+            "method": "DELETE", headers: myHeaders,
+            "body" : id
         }
-        const res = await fetch(API_URL + "/product_images?id=" + id, requestOptions)
+        const res = await fetch(API_URL + "/product_images", requestOptions)
         if (res.status >= 400) {
             const e = await res.json()
             throw e
